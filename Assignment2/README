@@ -1,0 +1,25 @@
+Name: 
+Yew Hung Leong
+
+
+Platform: 
+Unix/Ubuntu 14.01
+
+
+Info/Location: 
+Only I submitted. Class account dir: '/Assignment2/'. All files are zipped 
+into Assignment1.zip due to the nature of the single file submission on gsubmit.
+I had too many library files.
+
+
+Libraries Included: 
+GLM
+GLUT
+
+
+Instructions: 
+Run make to compile. Run ./as2 <params>
+
+
+Extra Credit:
+---------------------

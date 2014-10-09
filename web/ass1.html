@@ -1,0 +1,60 @@
+<html>
+<title>CS184 - Hung Leong - Assignment 1</title>
+
+<body>
+	<h1>Assignment 1</h1>
+	<hr>
+	<h1>Basic Image(s):</h1>
+	<b><span>Diffuse only, Single point light source</span></b><br>
+	<img src="./img/a1-diffuse.jpg" />
+	<br>
+	<span>-pl 200 200 200 0.4 0.8 1.0 -kd 0.7 0.4 0.5</span><br>
+	<br>
+	
+	<b><span>Phong Specular only, Single directional light source</span></b><br>
+	<img src="./img/a1-specular-dl.jpg" />
+	<br>
+	<span>-dl 1 1 -1 0.8 0.8 0.8 -ks 1.0 1.0 1.0 -sp 20</span>
+	<br>
+
+	<b><span>Phong Specular only, Single point light source</span></b><br>
+	<img src="./img/a1-specular-pl.jpg" />
+	<br>
+	<span>-pl 200 200 200 0.8 0.8 0.8 -ks 1.0 1.0 1.0 -sp 20</span>
+	<br>
+
+	<b><span>Diffuse + Phong Specular, Single point light source</span></b><br>
+	<img src="./img/a1-diffuse-specular.jpg" />
+	<br>
+	<span>-pl 200 200 200 0.4 0.8 1.0 -kd 0.7 0.4 0.5 -ks 1.0 1.0 1.0 -sp 20</span>
+	<br>
+
+	<b><span>Diffuse + Phong Specular + Ambient, Multi light source</span></b><br>
+	<img src="./img/a1-many-lights-all.jpg" />
+	<br>
+	<span>-dl 0 0.2 -1 1 1 1 -dl 1 -1 -1 0.5 0 0 -dl -1 -1 -1 0 1 0 -pl 10 10 30 0 0.1 0 -pl -4 -6 -10 0 1 1 -ka 0 0.1 0.2 -kd 0.7 0.4 0.5 -ks 1.0 1.0 1.0 -sp 20</span>
+	<br><br>
+
+	<h1>Extra Credit Image(s):</h1>
+	<b><span>Ward Anisotropic</span></b><br>
+	<img src="./img/a1-ward-anisotropic.jpg" />
+	<br>
+	<span>-dl -1 -1 -1 0.5 0.7 0.3 -ka 0.7 0.5 0.6 -kd 0.7 0.4 0.5 -kw 0.4 0.3 0.6 -kwv 1 1 -1 -kwc 0.1 0.4</span>
+	<br>
+
+	<b><span>Ward Anisotropic, Multi-spheres</span></b><br>
+	<img src="./img/a1-ward-anisotropic-multi.jpg" />
+	<br>
+	<span>-dl -1 -1 -1 0.5 0.7 0.3 -ka 0.7 0.5 0.6 -kd 0.7 0.4 0.5 -kw 0.4 0.3 0.6 -kwv 1 1 -1 -kwc 0.1 0.4 -multi</span>
+	<br>
+
+	<b><span>Diffuse + Phong Specular + Ambient, Wave-like surface (sin(x) * cos(z)), [Sort-of broken]</span></b><br>
+	<img src="./img/a1-wave.jpg" />
+	<br>
+	<span>./as1 -pl 200 200 200 0.6 0.6 0.6 -kd 1 1 0 -ka 0.1 0.1 0 -ks 0.8 0.8 0.8 -sp 16 -wave</span>
+	<br>
+
+	<a href="./"><span>Back</span></a>
+
+</body>
+</html>
