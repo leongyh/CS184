@@ -1,18 +1,23 @@
 #include <glm/glm.hpp>
-#include "Ray.h"
+#include "Camera.h"
+#include "Sampler.h"
+#include "RayTracer.h"
+#include "Film.h"
+#include "Sample.h"
+#include "Sphere.h"
+#include "DirectionalLight"
 
 class Scene{
-	glm::vec3 UL;
-	glm::vec3 LL;
-	glm::vec3 UR;
-	glm::vec3 LR;
-	
-	Camera cam;
+	Camera camera;
+	Sampler sampler;
+	RayTracer tracer;
+	Film image;
 
-	std::vector<Ray> rays;
+	std::vector<Sphere> spheres;
+	std::vector<DirectionalLight> d_lights;
 
 	public:
-		Scene(float ULx, float ULy, float ULz, float LLx, float LLy, float LLz, float URx, float URy, float URz, float LRx, float LRy, float LRz, Camera cam);
+		Scene();
 		virtual ~Scene();
 
 		void render();

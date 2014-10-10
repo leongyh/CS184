@@ -3,30 +3,33 @@
 #include <ctime>
 #include <cstdio>
 
-
-Sample::Sample(float x, float y, float r, float g, float b){
-	width = x;
-	height = y;
-
-	color = glm::vec3(r, g, b);
+Sample::Sample(int i, int j, float u, float v){
+	i = i;
+	j = j;
+	u = u;
+	v = v;
 }
 
 Sample::~Sample(){
 
 }
 
-glm::vec3 Sample::getColor(){
-	return color;
+int Sample::getI(){
+	return i;
 }
 
-float Sample::getX(){
-	return x;
+int Sample::getJ(){
+	return j;
 }
 
-float Sample::getY(){
-	return y;
+float Sample::getU(){
+	return u;
+}
+
+float Sample::getV(){
+	return v;
 }
 
 void Sample::print(){
-	printf("The Scene coordinates);
+	printf("The Sample coordinates (%f, %f)", u , v);
 }

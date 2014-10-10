@@ -1,16 +1,19 @@
 #include <glm/glm.hpp>
+#include <lodepng>
 #include "Sample.h"
+#include "Color.h"
 
 class Film{
-	float width;
-	float height;
+	int width;
+	int height;
+	char* filename;
 
-	std::vector<Sample> samples;
+	std::vector<unsigned char> image;
 
 	public:
-		Film(float w, float h);
+		Film(float w, float h, const char* filename);
 		virtual ~Film();
 
-		void encodeImage();
-		void addSample();
+		void encode();
+		void addPixel(const Sample& s, const Color& color);
 };

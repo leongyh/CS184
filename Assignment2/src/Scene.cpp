@@ -4,14 +4,14 @@
 #include <cstdio>
 
 
-Scene::Scene(float ULx, float ULy, float ULz, float LLx, float LLy, float LLz, float URx, float URy, float URz, float LRx, float LRy, float LRz, Camera cam){
-	UL = glm::vec3(ULx, ULy, ULz);
-	LL = glm::vec3(LLx, LLy, LLz);
-	UR = glm::vec3(URx, URy, URz);
-	LR = glm::vec3(LRx, LRy, LRz);
-	
-	cam = cam;
-	rays = new std::vector<Ray>();
+Scene::Scene(){
+	camera = new Camera(0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+	sampler = new Sampler(100, 100, -1.0f, 1.0f, 1.0f, -1.0f);
+	tracer = new RayTracer();
+	image = new Film(100, 100, "../img/test.png");
+
+	spheres = new std::vector<Sphere>();
+	spheres.add(new Sphere(4.0f, 0.0f, 0.0f, 1.0f));
 }
 
 Scene::~Scene(){
@@ -19,9 +19,17 @@ Scene::~Scene(){
 }
 
 void Scene::render(){
+	while(!sampler.hasNext()){
+		Sample s = sampler.sampleNext();
+		Ray r = camera.emitRay(s);
+		Color c = tracer.trace(r, spheres);
 
+		image.addPixel(s, c);
+	}
+
+	image.encode();
 }
 
 void Scene::print(){
-	printf("The Scene coordinates [UL, LL, UR, RR] are [(%f,%f,%f), (%f,%f,%f), (%f,%f,%f), (%f,%f,%f)]", UL.x, UL.y, UL.z, LL.x, LL.y, LL.z, UR.x, UR.y, UR.z, LR.x, LR.y, LR.z);
+	printf("The Scene");
 }

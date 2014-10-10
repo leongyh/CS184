@@ -8,7 +8,10 @@ class Ray{
 
 	public:
 		Ray(float px, float py, float pz, float dx, float dy, float dz);
-		virtual ~Ray(); 
+		virtual ~Ray();
+
+		glm::vec3 getPosition();
+		glm::vec3 getDirection();
 		
 		void print();
 };

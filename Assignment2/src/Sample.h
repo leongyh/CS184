@@ -1,16 +1,17 @@
 #include <glm/glm.hpp>
 
 class Sample{
-	float x;
-	float y;
-	glm::vec3 color;
+	int i, j;
+	float u, v;
 
 	public:
-		Sample(float x, float y);
+		Sample(int i, int j, float u, float v);
 		virtual ~Sample();
 
-		void addSample();
-		glm::vec3 Sample::getColor();
-		float Sample::getX();
-		float Sample::getY();
+		int getI();
+		int getJ();
+		float getU();
+		float getV();
+
+		void print();
 };
