@@ -9,7 +9,7 @@ ifeq ($(shell sw_vers 2>/dev/null | grep Mac | awk '{ print $$2}'),Mac)
     	-L"/System/Library/Frameworks/OpenGL.framework/Libraries" \
     	-lGL -lGLU -lm -lstdc++
 else
-	CFLAGS = -g -DGL_GLEXT_PROTOTYPES -Ilib/glut-3.7.6-bin -Ilib/glm
+	CFLAGS = -g -DGL_GLEXT_PROTOTYPES -Ilib/glut-3.7.6-bin -Ilib/glm -Ilib/lodepng
 	LDFLAGS = -lGL -lglut -lGLU
 endif
 
