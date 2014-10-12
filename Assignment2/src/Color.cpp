@@ -1,12 +1,12 @@
 #include "Color.h"
 #include <cstdlib>
-#include <ctime>
 #include <cstdio>
 #include <cmath>
+#include <algorithm>
 
 
 Color::Color(float r, float g, float b){
-	rgb = glm::vec3(min(max(r, 0.0f), 1.0f), min(max(g, 0.0f), 1.0f), min(max(b, 0.0f), 1.0f));
+	rgb = glm::vec3(std::min(std::max(r, 0.0f), 1.0f), std::min(std::max(g, 0.0f), 1.0f), std::min(std::max(b, 0.0f), 1.0f));
 	alpha = 1.0f;
 }
 

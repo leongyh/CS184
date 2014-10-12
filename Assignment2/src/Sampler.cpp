@@ -1,8 +1,6 @@
 #include "Sampler.h"
 #include <cstdlib>
-#include <ctime>
 #include <cstdio>
-
 
 Sampler::Sampler(int w, int h, float l, float r, float t, float b){
 	width = w;
@@ -22,14 +20,14 @@ Sampler::~Sampler(){
 }
 
 //Simple, no AA routine
-Sample Sampler::sampleNext(){
+Sample* Sampler::sampleNext(){
 	int i = iter % width;
 	int j = iter / height;
 
 	float u = l + (r - l) * (i + 0.5) / width;
 	float v = b + (t - b) * (j + 0.5) / height;
 
-	Sample s = new Sample(i, j, u, v);
+	Sample* s = new Sample(i, j, u, v);
 
 	iter++;
 
@@ -45,5 +43,5 @@ bool Sampler::hasNext(){
 }
 
 void Sampler::print(){
-	printf("The Sampler has (width, height): (%f,%f)", width, height);
+	printf("The Sampler has (width, height): (%d, %d)", width, height);
 }

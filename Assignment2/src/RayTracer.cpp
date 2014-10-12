@@ -1,8 +1,8 @@
 #include "RayTracer.h"
 #include <cstdlib>
-#include <ctime>
 #include <cstdio>
 #include <cmath>
+#include <vector>
 
 RayTracer::RayTracer(){
 	depth = 5;
@@ -16,15 +16,15 @@ RayTracer::~RayTracer(){
 
 }
 
-Color RayTracer::trace(const Ray& cam_ray, std::vector<Sphere> spheres){
+Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere>& spheres){
 	//find intersect on all geometries first
 	Sphere* closest_sphere;
 	float smallest_t = -1.0f;
 
-	for(int i = 0; i < spheres.length(); i++){
-		Sphere sphere = spheres.get(i);
+	for(int i = 0; i < spheres.size(); i++){
+		Sphere sphere = spheres[i];
 
-		float t = spheres.intersect(cam_ray);
+		float t = sphere.intersect(cam_ray);
 
 		if(t >= 0){
 			if(smallest_t < 0){
@@ -44,8 +44,6 @@ Color RayTracer::trace(const Ray& cam_ray, std::vector<Sphere> spheres){
 		return new Color(1.0f, 0.0f, 0.0f);
 	}
 }
-
-
 
 void RayTracer::print(){
 	printf("The Ray Tracer has recursion depth %d", depth);

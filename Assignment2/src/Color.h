@@ -1,3 +1,6 @@
+#ifndef COLOR_H_
+#define COLOR_H_
+
 #include <glm/glm.hpp>
 
 class Color{
@@ -5,7 +8,7 @@ class Color{
 	float alpha;
 
 	public:
-		Color(float r, float g, float b,);
+		Color(float r, float g, float b);
 		virtual ~Color();
 
 		unsigned char getRed();
@@ -13,5 +16,7 @@ class Color{
 		unsigned char getGreen();
 		unsigned char getAlpha();
 
-		void print()
+		void print();
 };
+
+#endif

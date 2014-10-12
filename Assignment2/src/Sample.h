@@ -1,3 +1,6 @@
+#ifndef SAMPLE_H_
+#define SAMPLE_H_
+
 #include <glm/glm.hpp>
 
 class Sample{
@@ -15,3 +18,5 @@ class Sample{
 
 		void print();
 };
+
+#endif

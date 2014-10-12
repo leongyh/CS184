@@ -1,3 +1,6 @@
+#ifndef SAMPLER_H_
+#define SAMPLER_H_
+
 #include <glm/glm.hpp>
 #include "Sample.h"
 
@@ -15,8 +18,10 @@ class Sampler{
 		Sampler(int w, int h, float l, float r, float t, float b);
 		virtual ~Sampler();
 
-		Sample sampleNext();
+		Sample* sampleNext();
 		bool hasNext();
 
 		void print();
 };
+
+#endif

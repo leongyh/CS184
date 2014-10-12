@@ -1,15 +1,13 @@
 #include "Film.h"
 #include <cstdlib>
-#include <ctime>
 #include <cstdio>
 
-
-Flim::Film(int w, int h, const char* filename){
+Film::Film(int w, int h, const char* f){
 	width = w;
 	height = h;
-	filename = filename;
+	filename = f;
 
-	image = new std::vector<unsigned char>();
+	image.reserve(width * h * 4);
 }
 
 Film::~Film(){
@@ -19,12 +17,14 @@ Film::~Film(){
 void Film::encode(){
 	unsigned error = lodepng::encode(filename, image, width, height);
 
-	if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+	// unsigned error = lodepng::encode(filename, image, width, height);
+
+	if(error) printf("%s", lodepng_error_text(error));
 }
 
-void Film::addPixel(const Sample& s, const Color& color){
-	image.add(color.getRed());
-	image.add(color.getBlue());
-	image.add(color.getGreen());
-	image.add(color.getAlpha());
+void Film::addPixel(Sample* s, Color* color){
+	image.push_back(color->getRed());
+	image.push_back(color->getBlue());
+	image.push_back(color->getGreen());
+	image.push_back(color->getAlpha());
 }

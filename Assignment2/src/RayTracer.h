@@ -1,7 +1,11 @@
+#ifndef RAY_TRACER_H_
+#define RAY_TRACER_H_
+
 #include <glm/glm.hpp>
-#include "Camera.h"
+#include <vector>
 #include "Sphere.h"
 #include "Color.h"
+#include "Ray.h"
 
 class RayTracer{
 	int depth;
@@ -11,7 +15,9 @@ class RayTracer{
 		RayTracer(int d);
 		virtual ~RayTracer();
 
-		Color trace(const Ray& cam_ray, std::vector<Sphere> spheres);
+		Color* trace(Ray* cam_ray, std::vector<Sphere>& spheres);
 
 		void print();
 };
+
+#endif

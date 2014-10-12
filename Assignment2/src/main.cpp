@@ -74,8 +74,8 @@ int main(int argc, char *argv[]) {
   //   }
   // }
 
-  Scene scene = new Scene();
-  scene.render();
+  Scene* scene = new Scene();
+  scene->render();
 
   return 0;
 }

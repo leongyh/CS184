@@ -1,3 +1,6 @@
+#ifndef POINT_LIGHT_H_
+#define POINT_LIGHT_H_
+
 #include <glm/glm.hpp>
 
 class PointLight{
@@ -17,3 +20,5 @@ class PointLight{
 		
 		void print();
 };
+
+#endif

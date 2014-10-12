@@ -1,3 +1,6 @@
+#ifndef DIRECTIONAL_LIGHT_H_
+#define DIRECTIONAL_LIGHT_H_
+
 #include <glm/glm.hpp>
 
 class DirectionalLight{
@@ -17,3 +20,5 @@ class DirectionalLight{
 		
 		void print();
 };
+
+#endif

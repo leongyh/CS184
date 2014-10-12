@@ -31,5 +31,5 @@ float Sample::getV(){
 }
 
 void Sample::print(){
-	printf("The Sample coordinates (%f, %f)", u , v);
+	printf("The Sample coordinates (%f, %f) and is pixel (%d, %d)", u , v, i, j);
 }
