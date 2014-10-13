@@ -26,5 +26,5 @@ Ray* Camera::emitRay(Sample* s){
 }
 
 void Camera::print(){
-	printf("The Camera coordinates are (%f,%f,%f)", position.x, position.y, position.z);
+	printf("The Camera coordinates are (%f,%f,%f) with view vector (%f,%f,%f) and vertical vector (%f,%f,%f) and horizontal vector (%f,%f,%f) with depth=%f\n", position.x, position.y, position.z, view.x, view.y, view.z, vertical.x, vertical.y, vertical.z, horizontal.x, horizontal.y, horizontal.z, depth);
 }

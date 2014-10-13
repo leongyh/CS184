@@ -12,7 +12,6 @@ class Sampler{
 	float t, b;
 
 	int iter;
-	int max_iter;
 
 	public:
 		Sampler(int w, int h, float l, float r, float t, float b);

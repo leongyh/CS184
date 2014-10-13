@@ -3,16 +3,15 @@
 #include <cstdio>
 
 Sampler::Sampler(int w, int h, float l, float r, float t, float b){
-	width = w;
-	height = h;
+	this->width = w;
+	this->height = h;
 
-	l = l;
-	r = r;
-	t = t;
-	b = b;
+	this->l = l;
+	this->r = r;
+	this->t = t;
+	this->b = b;
 
-	iter = 0;
-	max_iter = w*h;
+	this->iter = w * h - 1;
 }
 
 Sampler::~Sampler(){
@@ -22,20 +21,20 @@ Sampler::~Sampler(){
 //Simple, no AA routine
 Sample* Sampler::sampleNext(){
 	int i = iter % width;
-	int j = iter / height;
+	int j = height - (iter / width);
 
 	float u = l + (r - l) * (i + 0.5) / width;
 	float v = b + (t - b) * (j + 0.5) / height;
 
 	Sample* s = new Sample(i, j, u, v);
 
-	iter++;
+	iter--;
 
 	return s;
 }
 
 bool Sampler::hasNext(){
-	if (iter >= max_iter){
+	if (iter < 0){
 		return false;
 	} else{
 		return true;

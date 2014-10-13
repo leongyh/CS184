@@ -18,6 +18,7 @@ class Film{
 		virtual ~Film();
 
 		void encode();
+		void encodeTest();
 		void addPixel(Sample* s, Color* color);
 };
 

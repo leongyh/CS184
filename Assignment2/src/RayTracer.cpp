@@ -26,8 +26,8 @@ Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere>& spheres){
 
 		float t = sphere.intersect(cam_ray);
 
-		if(t >= 0){
-			if(smallest_t < 0){
+		if(t >= 0.0f){
+			if(smallest_t < 0.0f){
 				closest_sphere = &sphere;
 				smallest_t = t;
 			} else if(t < smallest_t){
@@ -38,8 +38,8 @@ Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere>& spheres){
 	}
 
 	//paint red for simple test
-	if(closest_sphere == NULL){
-		return new Color(1.0f, 1.0f, 1.0f);
+	if(smallest_t < 0.0f){
+		return new Color(0.0f, 0.0f, 0.0f);
 	} else{
 		return new Color(1.0f, 0.0f, 0.0f);
 	}

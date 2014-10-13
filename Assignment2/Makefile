@@ -2,6 +2,7 @@ CC = g++
 
 SRCDIR = src
 BINDIR = bin
+IMGDIR = img
 
 CFLAGS = -g -Ilib/glm
 
@@ -20,4 +21,5 @@ $(BINDIR)/%.o: $(SRCDIR)/%.cpp
 
 clean:
 	rm -f $(BINDIR)/*
+	rm -f $(IMGDIR)/*
 	rm -f as2

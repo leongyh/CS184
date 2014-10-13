@@ -22,5 +22,5 @@ glm::vec3 Ray::getDirection(){
 }
 
 void Ray::print(){
-	printf("The ray coordinates are (%f,%f,%f) of direction (%f,%f,%f)", position.x, position.y, position.z, direction.x, direction.y, direction.z);
+	printf("The ray coordinates are (%f,%f,%f) of direction (%f,%f,%f)\n", position.x, position.y, position.z, direction.x, direction.y, direction.z);
 }

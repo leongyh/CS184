@@ -4,10 +4,10 @@
 #include <cstdio>
 
 Sample::Sample(int i, int j, float u, float v){
-	i = i;
-	j = j;
-	u = u;
-	v = v;
+	this->i = i;
+	this->j = j;
+	this->u = u;
+	this->v = v;
 }
 
 Sample::~Sample(){
@@ -31,5 +31,5 @@ float Sample::getV(){
 }
 
 void Sample::print(){
-	printf("The Sample coordinates (%f, %f) and is pixel (%d, %d)", u , v, i, j);
+	printf("Sample has pixel (%d, %d) and coordinates (%f, %f)\n", i, j, u, v);
 }
