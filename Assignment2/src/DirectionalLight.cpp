@@ -9,6 +9,11 @@ DirectionalLight::DirectionalLight(float x, float y, float z, float r, float g, 
 	color = glm::vec3(r, g, b);
 }
 
+DirectionalLight::DirectionalLight(const DirectionalLight& obj){
+	direction = obj.direction;
+	color = obj.color;
+}
+
 DirectionalLight::~DirectionalLight(){
 
 }

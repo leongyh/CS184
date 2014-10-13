@@ -11,7 +11,6 @@ Sphere::Sphere(float x, float y, float z, float r){
 
 Sphere::Sphere(const Sphere& obj){
 	position = obj.position;
-	// *obj.position = glm::vec3(position.x, position.y, position.z);
 	radius = obj.radius;
 }
 

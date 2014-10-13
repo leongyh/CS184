@@ -9,6 +9,11 @@ PointLight::PointLight(float x, float y, float z, float centerX, float centerY, 
 	color = glm::vec3(r, g, b);
 }
 
+PointLight::PointLight(const PointLight& obj){
+	position = obj.position;
+	color = obj.color;
+}
+
 PointLight::~PointLight(){
 
 }

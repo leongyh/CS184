@@ -15,6 +15,7 @@ class Ray{
 
 		glm::vec3 getPosition();
 		glm::vec3 getDirection();
+		glm::vec3 getPoint(float t);
 		
 		void print();
 };

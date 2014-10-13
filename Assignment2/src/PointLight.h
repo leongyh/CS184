@@ -9,6 +9,7 @@ class PointLight{
 	
 	public:
 		PointLight(float x, float y, float z, float centerX, float centerY, float centerZ, float scale, float r, float g, float b);
+		PointLight(const PointLight& obj);
 		virtual ~PointLight(); 
 		
 		void setPosition(float x, float y, float z);

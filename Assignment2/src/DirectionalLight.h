@@ -9,6 +9,7 @@ class DirectionalLight{
 	
 	public:
 		DirectionalLight(float x, float y, float z, float r, float g, float b);
+		DirectionalLight(const DirectionalLight& obj);
 		virtual ~DirectionalLight(); 
 		
 		void setDirection(float x, float y, float z);
