@@ -27,11 +27,11 @@ void DirectionalLight::setColor(float r, float g, float b){
 }
 
 glm::vec3 DirectionalLight::getDirection(){
-	return direction;
+	return glm::normalize(direction);
 }
 
 glm::vec3 DirectionalLight::getReverseDirection(){
-	return -1.0f * direction;
+	return -1.0f * glm::normalize(direction);
 }
 
 glm::vec3 DirectionalLight::getColor(){

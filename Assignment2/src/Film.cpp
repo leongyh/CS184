@@ -47,7 +47,5 @@ void Film::encodeTest(){
 
 	unsigned error = lodepng::encode(filename, image, width, height);
 
-	// unsigned error = lodepng::encode(filename, image, width, height);
-
 	if(error) printf("%s", lodepng_error_text(error));	
 }

@@ -8,6 +8,11 @@ Ray::Ray(float px, float py, float pz, float dx, float dy, float dz){
 	direction = glm::vec3(dx, dy, dz);
 }
 
+Ray::Ray(glm::vec3 point, glm::vec3 dir){
+	position = point;
+	direction = dir;
+}
+
 Ray::~Ray(){
 
 }
@@ -18,7 +23,11 @@ glm::vec3 Ray::getPosition(){
 }
 
 glm::vec3 Ray::getDirection(){
-	return direction;
+	return glm::normalize(direction);
+}
+
+glm::vec3 Ray::getReverseDirection(){
+	return -1.0f * glm::normalize(direction);
 }
 
 glm::vec3 Ray::getPoint(float t){
@@ -26,5 +35,5 @@ glm::vec3 Ray::getPoint(float t){
 }
 
 void Ray::print(){
-	printf("The ray coordinates are (%f,%f,%f) of direction (%f,%f,%f)\n", position.x, position.y, position.z, direction.x, direction.y, direction.z);
+	printf("The ray origin is (%f,%f,%f) of direction (%f,%f,%f)\n", position.x, position.y, position.z, direction.x, direction.y, direction.z);
 }

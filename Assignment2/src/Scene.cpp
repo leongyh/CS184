@@ -7,26 +7,33 @@ Scene::Scene(){
 	int width = 200;
 	int height = 200;
 
-	camera = new Camera(0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+	camera = new Camera(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, 1.0f);
 	sampler = new Sampler(width, height, -1.0f, 1.0f, 1.0f, -1.0f);
 	tracer = new RayTracer();
 	image = new Film(width, height, "/home/h/test.png");
 
 	//test scene
-	shading_attr["k_ambient"] = glm::vec3(0.2f, 0.2f, 0.2f);
-	shading_attr["k_specular"] = glm::vec3(0.3f, 0.3f, 0.3f);
-	shading_attr["k_diffuse"] = glm::vec3(0.7f, 0.5f, 0.5f);
-	shading_attr["pow_specular"] = glm::vec3(8.0f, 0.0f, 0.0f);
+	shading_attr["k_ambient"] = glm::vec3(0.0f, 0.0f, 0.0f);
+	shading_attr["k_specular"] = glm::vec3(1.0f, 1.0f, 1.0f);
+	shading_attr["k_diffuse"] = glm::vec3(0.0f, 0.0f, 0.0f);
+	shading_attr["pow_specular"] = glm::vec3(20.0f, 0.0f, 0.0f);
 
-	Sphere* s = new Sphere(4.0f, 0.0f, 0.0f, 1.0f);
+	Sphere* s = new Sphere(0.0f, 0.0f, -0.5f, 1.0f);
 
 	spheres.reserve(1);
 	spheres.push_back(*s);
 
-	DirectionalLight* dl = new DirectionalLight(1.0f, -0.8f, -1.0f, 1.0f, 0.1f, 0.1f);
+	// 200 200 200 0.4 0.8 1.0 -kd 0.7 0.4 0.5
+	// -pl 200 200 200 0.4 0.8 1.0 -kd 0.7 0.4 0.5 -ks 1.0 1.0 1.0 -sp 20
+	// -pl 200 200 200 0.8 0.8 0.8 -ks 1.0 1.0 1.0 -sp 20 
 
-	dir_lights.reserve(1);
-	dir_lights.push_back(*dl);
+	// DirectionalLight* dl = new DirectionalLight(-0.5f, -0.3f, -0.9f, 0.8f, 0.8f, 0.8f);
+	// dir_lights.reserve(1);
+	// dir_lights.push_back(*dl);
+
+	PointLight* pl = new PointLight(0.0f, 0.0f, 200.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.8f, 0.8f, 0.8f);
+	pnt_lights.reserve(1);
+	pnt_lights.push_back(*pl);
 }
 
 Scene::~Scene(){

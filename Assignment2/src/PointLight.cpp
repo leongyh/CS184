@@ -34,10 +34,8 @@ glm::vec3 PointLight::getColor(){
 	return color;
 }
 
-glm::vec3 PointLight::getLightVec(float surfaceX, float surfaceY, float surfaceZ){
-	glm::vec3 surfaceVec = glm::vec3(surfaceX, surfaceY, surfaceZ);
-
-	return -1.0f * glm::normalize(surfaceVec - position);
+glm::vec3 PointLight::getLightVec(glm::vec3 point){
+	return -1.0f * glm::normalize(point - position);
 }
 
 void PointLight::print(){

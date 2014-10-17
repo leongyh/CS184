@@ -17,7 +17,7 @@ class PointLight{
 		
 		glm::vec3 getPosition();
 		glm::vec3 getColor();
-		glm::vec3 getLightVec(float surfaceX, float surfaceY, float surfaceZ);
+		glm::vec3 getLightVec(glm::vec3 point);
 		
 		void print();
 };

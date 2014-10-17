@@ -20,7 +20,7 @@ Ray* Camera::emitRay(Sample* s){
 
 	glm::vec3 direction = depth * view + u * horizontal + v * vertical;
 
-	Ray* r = new Ray(position.x, position.y, position.x, direction.x, direction.y, direction.z);
+	Ray* r = new Ray(position.x, position.y, position.z, direction.x, direction.y, direction.z);
 
 	return r;
 }

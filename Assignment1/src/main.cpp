@@ -121,7 +121,7 @@ glm::vec3 getNormal(float theta, float phi){
   float y = sin(theta * PI / 180) * sin(phi * PI / 180);
   float z = cos(theta * PI / 180);
 
-  return glm::vec3(x, y, z);
+  return glm::normalize(glm::vec3(x, y, z));
 }
 
 glm::vec3 calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity){
@@ -136,10 +136,12 @@ glm::vec3 calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 int
 
 glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity){
   //reflected
-  glm::vec3 r_vec = (-1.0f * incident) + (2.0f * glm::dot(incident, normal) * normal);
+  glm::vec3 r_vec = glm::normalize((-1.0f * incident) + (2.0f * glm::dot(incident, normal) * normal));
 
   float dot_pow = pow(max(0.0f, glm::dot(r_vec, view_vec)), specular_pow);
-
+  if(dot_pow > 0.0001f){
+    printf("%f\n", dot_pow);
+  }
   //half-angle
   // glm::vec3 h_vec = glm::normalize(incident + view_vec);
 
@@ -148,7 +150,7 @@ glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 inte
   float r = max(k_specular.x * intensity.x * dot_pow, 0.0f);
   float g = max(k_specular.y * intensity.y * dot_pow, 0.0f);
   float b = max(k_specular.z * intensity.z * dot_pow, 0.0f);
-
+  // printf("%f %f %f\n", r, g, b); 
   return glm::vec3(r, g, b);
 }
 
@@ -370,8 +372,8 @@ void keyPress(unsigned char key, int x, int y){
 //****************************************************
 int main(int argc, char *argv[]) {
   // Initalize theviewport size
-  viewport.w = 400;
-  viewport.h = 400;
+  viewport.w = 200;
+  viewport.h = 200;
 
 //Initialize radius
   unit_radius = min(viewport.w, viewport.h) / 3.0f;

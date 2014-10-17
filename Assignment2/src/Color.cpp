@@ -15,19 +15,19 @@ Color::~Color(){
 }
 
 unsigned char Color::getRed(){
-	return (unsigned char) rgb.x * 255;
+	return (unsigned char) (rgb.x * 255);
 }
 
 unsigned char Color::getBlue(){
-	return (unsigned char) rgb.y * 255;
+	return (unsigned char) (rgb.y * 255);
 }
 
 unsigned char Color::getGreen(){
-	return (unsigned char) rgb.z * 255;
+	return (unsigned char) (rgb.z * 255);
 }
 
 unsigned char Color::getAlpha(){
-	return (unsigned char) alpha * 255;
+	return (unsigned char) (alpha * 255);
 }
 
 void Color::print(){
