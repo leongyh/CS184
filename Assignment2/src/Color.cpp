@@ -14,6 +14,10 @@ Color::~Color(){
 
 }
 
+// void Color::addRGB(float r, float g, float b){
+// 	rgb += glm::vec3(r, g, b);
+// }
+
 unsigned char Color::getRed(){
 	return (unsigned char) (rgb.x * 255);
 }

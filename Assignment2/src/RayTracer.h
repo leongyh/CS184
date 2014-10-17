@@ -25,6 +25,7 @@ class RayTracer{
 		void print();
 
 	private:
+		glm::vec3 traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr, Color* color, int current_depth);
 		glm::vec3 calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, std::map<std::string, glm::vec3>& shading_attr);
 		glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, Ray* view_ray, std::map<std::string, glm::vec3>& shading_attr);
 		glm::vec3 calculateAmbient(glm::vec3 intensity, std::map<std::string, glm::vec3>& shading_attr);

@@ -11,6 +11,7 @@ class Color{
 		Color(float r, float g, float b);
 		virtual ~Color();
 
+		// void addRGB(float r, float g, float b);
 		unsigned char getRed();
 		unsigned char getBlue();
 		unsigned char getGreen();
