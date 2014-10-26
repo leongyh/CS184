@@ -46,7 +46,7 @@ Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere>& spheres){
 	}
 }
 
-glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr, int current_depth){
+Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr){
 	//find intersect on all geometries first
 	Sphere* closest_sphere;
 	float smallest_t = -1.0f;
@@ -69,7 +69,7 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, 
 
 	//for all rays that do not hit, paint black
 	if(smallest_t < 0.0f){
-		return glm::vec3(0.0f, 0.0f, 0.0f);
+		return new Color(0.0f, 0.0f, 0.0f);
 	}
 
 	//begin shading calculations
@@ -85,7 +85,6 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, 
 		glm::vec3 incident = (dir_lights[num_dl]).getReverseDirection();
 		glm::vec3 intensity = (dir_lights[num_dl]).getColor();
 
-		//find shadows, skip iteration
 		Ray* dir_ray = new Ray(point, incident);
 
 		for(int i = 0; i < spheres.size(); i++){
@@ -93,15 +92,17 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, 
 
 			float t = sphere.intersect(dir_ray);
 
-			if(t > 0.0f || closest_sphere == &sphere){
-				delete dir_ray;
-				continue;
+			if(t >= 0.0f){
+				if(smallest_t < 0.0f){
+					closest_sphere = &sphere;
+					smallest_t = t;
+				} else if(t < smallest_t){
+					closest_sphere = &sphere;
+					smallest_t = t;
+				}
 			}
 		}
 
-		delete dir_ray;
-
-		//else do shading
 		glm::vec3 rgbDiffusion = calculateDiffusion(normal, incident, intensity, shading_attr);
 
         glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, cam_ray, shading_attr);
@@ -117,23 +118,6 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, 
 		glm::vec3 incident = (pnt_lights[num_pl]).getLightVec(point);
 		glm::vec3 intensity = (pnt_lights[num_pl]).getColor();
 
-		//find shadows, skip iteration
-		Ray* dir_ray = new Ray(point, incident);
-
-		for(int i = 0; i < spheres.size(); i++){
-			Sphere sphere = spheres[i];
-
-			float t = sphere.intersect(dir_ray);
-
-			if(t > 0.0f || closest_sphere == &sphere){
-				delete dir_ray;
-				continue;
-			}
-		}
-
-		delete dir_ray;
-
-		//else do shading
 		glm::vec3 rgbDiffusion = calculateDiffusion(normal, incident, intensity, shading_attr);
 
         glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, cam_ray, shading_attr);
@@ -149,24 +133,7 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, 
 	g = std::min(1.0f, g);
 	b = std::min(1.0f, b);
 
-	if(current_depth < depth){
-		glm::vec3 refl_color = traceRecursion(cam_ray, spheres, dir_lights, pnt_lights, shading_attr, current_depth + 1);
-
-		float refl_r = std::min(1.0f, r + refl_color.x * shading_attr["k_reflect"].x);
-		float refl_g = std::min(1.0f, g + refl_color.y * shading_attr["k_reflect"].y);
-		float refl_b = std::min(1.0f, b + refl_color.z * shading_attr["k_reflect"].z);
-
-		return glm::vec3(refl_r, refl_g, refl_b);
-	} else{
-		return glm::vec3(r, g, b);
-	}
-}
-
-Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr){
-	int current_depth = 0;
-	// Color* color = new Color(0.0f, 0.0f, 0.0f);
-
-	traceRecursion(cam_ray, spheres, dir_lights, pnt_lights, shading_attr, current_depth);
+	return new Color(r, g, b);
 }
 
 glm::vec3 RayTracer::calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, std::map<std::string, glm::vec3>& shading_attr){

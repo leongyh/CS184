@@ -16,7 +16,6 @@ Scene::Scene(){
 	shading_attr["k_ambient"] = glm::vec3(0.0f, 0.0f, 0.0f);
 	shading_attr["k_specular"] = glm::vec3(1.0f, 1.0f, 1.0f);
 	shading_attr["k_diffuse"] = glm::vec3(0.0f, 0.0f, 0.0f);
-	shading_attr["k_reflect"] = glm::vec3(0.0f, 0.0f, 0.0f);
 	shading_attr["pow_specular"] = glm::vec3(20.0f, 0.0f, 0.0f);
 
 	Sphere* s = new Sphere(0.0f, 0.0f, -0.5f, 1.0f);
