@@ -41,6 +41,22 @@ Scene::~Scene(){
 
 }
 
+void Scene::defineCamera(Camera* cam){
+	camera = cam;
+}
+
+void Scene::insertDirectionalLight(DirectionalLight* dl){
+	dir_lights.push_back(*dl);
+}
+
+void Scene::insertPointLight(PointLight* pl){
+	pnt_lights.push_back(*pl);
+}
+
+void Scene::insertSphere(Sphere* sphere){
+	spheres.push_back(*sphere);
+}
+
 void Scene::render(){
 	printf("Rendering start...\n");
 	// camera->print();	

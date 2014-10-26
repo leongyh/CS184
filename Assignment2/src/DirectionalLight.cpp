@@ -5,7 +5,7 @@
 
 
 DirectionalLight::DirectionalLight(float x, float y, float z, float r, float g, float b){
-	direction = glm::normalize(glm::vec3(x, y, z));
+	direction = glm::vec3(x, y, z);
 	color = glm::vec3(r, g, b);
 }
 
