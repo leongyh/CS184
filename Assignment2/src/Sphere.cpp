@@ -7,15 +7,67 @@
 Sphere::Sphere(float x, float y, float z, float r){
 	position = glm::vec3(x, y, z);
 	radius = r;
+
+	k_ambient = glm::vec3(0.0f, 0.0f, 0.0f);
+	k_diffuse = glm::vec3(0.0f, 0.0f, 0.0f);
+	k_specular = glm::vec3(0.0f, 0.0f, 0.0f);
+	k_reflect = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	specular_pow = 1;
 }
 
 Sphere::Sphere(const Sphere& obj){
 	position = obj.position;
 	radius = obj.radius;
+	k_ambient = obj.k_ambient;
+	k_diffuse = obj.k_diffuse;
+	k_specular = obj.k_specular;
+	k_reflect = obj.k_reflect;
+	specular_pow = obj.specular_pow;
 }
 
 Sphere::~Sphere(){
 
+}
+
+void Sphere::setAmbient(glm::vec3 ka){
+	k_ambient = ka;
+}
+
+void Sphere::setDiffuse(glm::vec3 kd){
+	k_diffuse = kd;
+}
+
+void Sphere::setSpecular(glm::vec3 ks){
+	k_specular = ks;
+}
+
+void Sphere::setSpecularPow(int sp){
+	specular_pow = sp;
+}
+
+void Sphere::setReflect(glm::vec3 kr){
+	k_reflect = kr;
+}
+
+glm::vec3 Sphere::getAmbient(){
+	return k_ambient;
+}
+
+glm::vec3 Sphere::getDiffuse(){
+	return k_diffuse;
+}
+
+glm::vec3 Sphere::getSpecular(){
+	return k_specular;
+}
+
+int Sphere::getSpecularPow(){
+	return specular_pow;
+}
+
+glm::vec3 Sphere::getReflect(){
+	return k_reflect;
 }
 
 glm::vec3 Sphere::getNormal(glm::vec3 point){

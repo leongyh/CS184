@@ -27,6 +27,11 @@ class Scene{
 		Scene();
 		virtual ~Scene();
 
+		void defineCamera(Camera* cam);
+		void insertDirectionalLight(DirectionalLight* dl);
+		void insertPointLight(PointLight* pl);
+		void insertSphere(Sphere* sphere);
+
 		void render();
 
 		void print();
