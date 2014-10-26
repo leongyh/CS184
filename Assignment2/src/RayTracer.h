@@ -20,7 +20,6 @@ class RayTracer{
 		virtual ~RayTracer();
 
 		Color* trace(Ray* cam_ray, std::vector<Sphere>& spheres);
-		glm::vec3 traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr, int current_depth);
 		Color* trace(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr);
 
 		void print();
