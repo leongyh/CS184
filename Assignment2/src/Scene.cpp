@@ -76,7 +76,7 @@ void Scene::render(){
 		// r->print();
 
 		// Color* c = tracer->trace(r, spheres);
-		Color* c = tracer->trace(r, spheres, dir_lights, pnt_lights, 0);
+		Color* c = tracer->trace(r, spheres, dir_lights, pnt_lights, 5);
 		// c->print();
 		
 		image->addPixel(s, c);

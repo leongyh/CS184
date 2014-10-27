@@ -171,22 +171,26 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 	g = std::min(1.0f, g);
 	b = std::min(1.0f, b);
 
-	return glm::vec3(r, g, b);
+	// return glm::vec3(r, g, b);
 
-	//reflection recursion
-	// if(current_depth < max_depth){
-	// 	glm::vec3 refl_color = traceRecursion(cam_ray, spheres, dir_lights, pnt_lights, max_depth, current_depth + 1);
+	// reflection recursion
+	if(current_depth < max_depth){
+		glm::vec3 inc_ray_dir = cam_ray->getDirection();
+		glm::vec3 refl_dir = inc_ray_dir - 2 * glm::dot(inc_ray_dir, normal) * normal;
+		Ray* refl_ray = new Ray(point, refl_dir);
 
-	// 	glm::vec3 kr = 
+		glm::vec3 refl_color = traceRecursion(refl_ray, spheres, dir_lights, pnt_lights, max_depth, current_depth + 1);
 
-	// 	float refl_r = std::min(1.0f, r + refl_color.x * kr.x);
-	// 	float refl_g = std::min(1.0f, g + refl_color.y * kr.y);
-	// 	float refl_b = std::min(1.0f, b + refl_color.z * kr.z);
+		glm::vec3 kr = closest_sphere->getReflect();
 
-	// 	return glm::vec3(refl_r, refl_g, refl_b);
-	// } else{
-	// 	return glm::vec3(r, g, b);
-	// }
+		float refl_r = std::min(1.0f, r + refl_color.x * kr.x);
+		float refl_g = std::min(1.0f, g + refl_color.y * kr.y);
+		float refl_b = std::min(1.0f, b + refl_color.z * kr.z);
+
+		return glm::vec3(refl_r, refl_g, refl_b);
+	} else{
+		return glm::vec3(r, g, b);
+	}
 }
 
 Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth){

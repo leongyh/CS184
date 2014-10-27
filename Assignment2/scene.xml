@@ -126,4 +126,77 @@
 			</sphere>
 		</geom>
 	</test>
+
+	<test id="3">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<view>0.0 0.0 -1.0</view>
+				<up>-1.0, 0.0, 0.0</up>
+				<depth>3.0</depth>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_shadows.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>-1.0 1.0 1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -17.0</pos>
+				<rad>2.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>0.0 4.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>0.0 -4.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 0.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>4.0 0.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>-4.0 0.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+		</geom>
+	</test>
 </root>
