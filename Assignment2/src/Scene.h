@@ -18,16 +18,16 @@ class Scene{
 	RayTracer* tracer;
 	Film* image;
 
-	std::map<std::string, glm::vec3> shading_attr;
-	std::vector<Sphere> spheres;
-	std::vector<DirectionalLight> dir_lights;
-	std::vector<PointLight> pnt_lights;
+	std::vector<Sphere*> spheres;
+	std::vector<DirectionalLight*> dir_lights;
+	std::vector<PointLight*> pnt_lights;
 
 	public:
 		Scene();
 		virtual ~Scene();
 
 		void defineCamera(Camera* cam);
+		void defineImage(int w, int h, const std::string file_loc);
 		void insertDirectionalLight(DirectionalLight* dl);
 		void insertPointLight(PointLight* pl);
 		void insertSphere(Sphere* sphere);

@@ -5,7 +5,7 @@
 
 Ray::Ray(float px, float py, float pz, float dx, float dy, float dz){
 	position = glm::vec3(px, py, pz);
-	direction = glm::vec3(dx, dy, dz);
+	direction = glm::normalize(glm::vec3(dx, dy, dz));
 }
 
 Ray::Ray(glm::vec3 point, glm::vec3 dir){

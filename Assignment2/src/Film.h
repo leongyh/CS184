@@ -9,17 +9,18 @@
 class Film{
 	int width;
 	int height;
-	const char* filename;
+	std::string filename;
 
 	std::vector<unsigned char> image;
 
 	public:
-		Film(int w, int h, const char* f);
+		Film(int w, int h, const std::string f);
 		virtual ~Film();
 
 		void encode();
 		void encodeTest();
 		void addPixel(Sample* s, Color* color);
+		void print();
 };
 
 #endif

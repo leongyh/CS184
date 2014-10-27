@@ -10,6 +10,11 @@ Color::Color(float r, float g, float b){
 	alpha = 1.0f;
 }
 
+Color::Color(glm::vec3 col){
+	rgb = col;
+	alpha = 1.0f;
+}
+
 Color::~Color(){
 
 }

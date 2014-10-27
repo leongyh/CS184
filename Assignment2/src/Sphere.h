@@ -22,7 +22,7 @@ class Sphere{
 
 		void setAmbient(glm::vec3 ka);
 		void setDiffuse(glm::vec3 kd);
-		void setSpecular(glm::vec3);
+		void setSpecular(glm::vec3 ks);
 		void setSpecularPow(int sp);
 		void setReflect(glm::vec3 kr);
 

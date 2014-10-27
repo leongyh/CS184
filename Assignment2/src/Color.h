@@ -9,6 +9,7 @@ class Color{
 
 	public:
 		Color(float r, float g, float b);
+		Color(glm::vec3 col);
 		virtual ~Color();
 
 		// void addRGB(float r, float g, float b);

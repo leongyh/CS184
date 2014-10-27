@@ -2,10 +2,10 @@
 #include <cstdlib>
 #include <cstdio>
 
-Film::Film(int w, int h, const char* f){
-	this->width = w;
-	this->height = h;
-	this->filename = f;
+Film::Film(int w, int h, const std::string f){
+	width = w;
+	height = h;
+	filename = f;
 
 	this->image.reserve(width * h * 4);
 }
@@ -48,4 +48,8 @@ void Film::encodeTest(){
 	unsigned error = lodepng::encode(filename, image, width, height);
 
 	if(error) printf("%s", lodepng_error_text(error));	
+}
+
+void Film::print(){
+	// printf("The Image Film has file location \"%s\" and (width, height): (%d, %d)\n", filename , width, height);
 }

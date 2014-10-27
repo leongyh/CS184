@@ -42,5 +42,5 @@ bool Sampler::hasNext(){
 }
 
 void Sampler::print(){
-	printf("The Sampler has (width, height): (%d, %d)", width, height);
+	printf("The Sampler has (width, height): (%d, %d)\n", width, height);
 }

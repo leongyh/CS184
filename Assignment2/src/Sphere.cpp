@@ -71,7 +71,9 @@ glm::vec3 Sphere::getReflect(){
 }
 
 glm::vec3 Sphere::getNormal(glm::vec3 point){
-	return (point - position) / radius;
+	glm::vec3 normal = (point - position) / radius;
+
+	return normal;
 }
 
 float Sphere::intersect(Ray* cam_ray){
@@ -95,5 +97,5 @@ float Sphere::intersect(Ray* cam_ray){
 }
 
 void Sphere::print(){
-	printf("The Sphere coordinates are (%f,%f,%f) with radius %f", position.x, position.y, position.z, radius);
+	printf("The Sphere coordinates are (%f,%f,%f) with radius %f\n", position.x, position.y, position.z, radius);
 }

@@ -12,14 +12,13 @@
 
 class Reader{
 	pugi::xml_node root;
-	int test_num;
+	const char* test_num;
 
 	public:
-		Reader(const char* file_loc, int num);
+		Reader(const char* file_loc, const char* num);
 		virtual ~Reader();
 
-		void run(Scene& scene);
-		void test(Scene& scene);
+		void parse(Scene& scene);
 };
 
 #endif

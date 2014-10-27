@@ -12,24 +12,20 @@
 #include "PointLight.h"
 
 class RayTracer{
-	int depth;
-
 	public:
 		RayTracer();
-		RayTracer(int d);
 		virtual ~RayTracer();
 
-		Color* trace(Ray* cam_ray, std::vector<Sphere>& spheres);
-		glm::vec3 traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr, int current_depth);
-		Color* trace(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr);
+		Color* traceSimple(Ray* cam_ray, std::vector<Sphere*>& spheres);
+		Color* trace(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth);
 
 		void print();
 
 	private:
-		glm::vec3 traceRecursion(Ray* cam_ray, std::vector<Sphere>& spheres, std::vector<DirectionalLight>& dir_lights, std::vector<PointLight>& pnt_lights, std::map<std::string, glm::vec3>& shading_attr, Color* color, int current_depth);
-		glm::vec3 calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, std::map<std::string, glm::vec3>& shading_attr);
-		glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, Ray* view_ray, std::map<std::string, glm::vec3>& shading_attr);
-		glm::vec3 calculateAmbient(glm::vec3 intensity, std::map<std::string, glm::vec3>& shading_attr);
+		glm::vec3 traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth, int current_depth);
+		glm::vec3 calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, glm::vec3 kd);
+		glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, glm::vec3 ks, int sp, Ray* view_ray);
+		glm::vec3 calculateAmbient(glm::vec3 intensity, glm::vec3 ka);
 };
 
 #endif
