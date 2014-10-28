@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include "pugixml.hpp"
+#include "Transform.h"
 #include "Scene.h"
 #include "Camera.h"
 #include "DirectionalLight.h"
@@ -12,10 +13,10 @@
 
 class Reader{
 	pugi::xml_node root;
-	const char* test_num;
+	char* test_num;
 
 	public:
-		Reader(const char* file_loc, const char* num);
+		Reader(const char* file_loc, char* num);
 		virtual ~Reader();
 
 		void parse(Scene& scene);

@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sstream>
 
-Reader::Reader(const char* file_loc, const char* num){
+Reader::Reader(const char* file_loc, char* num){
 	pugi::xml_document doc;
 	doc.load_file(file_loc);
 
@@ -156,6 +156,33 @@ void Reader::parse(Scene& scene){
 							std::stringstream kr(geom.child_value("kr"));
 							kr >> krR, kr >> krG, kr >> krB;
 							sph->setReflect(glm::vec3(krR, krG, krB));
+						} else if(strcmp(sphere_params.name(), "trans") == 0){
+							Transform* t = new Transform();
+
+							for(pugi::xml_node trans_params = sphere_params.first_child(); trans_params; trans_params = trans_params.next_sibling()){
+								if(strcmp(trans_params.name(), "tlt") == 0){
+									// printf("%s\n", trans_params.child_value());
+									float x, y, z;
+									std::stringstream tlt(trans_params.child_value());
+									tlt >> x, tlt >> y, tlt >> z;
+									t->pushTranslate(x, y, z);
+								} else if(strcmp(trans_params.name(), "scale") == 0){
+									// printf("%s\n", trans_params.child_value());
+									float x, y, z;
+									std::stringstream scale(trans_params.child_value());
+									scale >> x, scale >> y, scale >> z;
+									t->pushScale(x, y, z);
+									t->print();
+								} else if(strcmp(trans_params.name(), "rot") == 0){
+									// printf("%s\n", trans_params.child_value());
+									float x, y, z;
+									std::stringstream rot(trans_params.child_value());
+									rot >> x, rot >> y, rot >> z;
+									t->pushRotate(x, y, z);
+								}
+							}
+
+							sph->setTransform(t->getTransform());
 						}
 					}
 

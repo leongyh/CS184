@@ -1,3 +1,5 @@
+#define GLM_SWIZZLE
+
 #include "Sphere.h"
 #include <cstdlib>
 #include <cstdio>
@@ -14,6 +16,9 @@ Sphere::Sphere(float x, float y, float z, float r){
 	k_reflect = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	specular_pow = 1;
+
+	trans = glm::mat4(1.0f);
+	is_transformed = false;
 }
 
 Sphere::Sphere(const Sphere& obj){
@@ -24,6 +29,8 @@ Sphere::Sphere(const Sphere& obj){
 	k_specular = obj.k_specular;
 	k_reflect = obj.k_reflect;
 	specular_pow = obj.specular_pow;
+	trans = obj.trans;
+	is_transformed = obj.is_transformed;
 }
 
 Sphere::~Sphere(){
@@ -50,6 +57,13 @@ void Sphere::setReflect(glm::vec3 kr){
 	k_reflect = kr;
 }
 
+void Sphere::setTransform(glm::mat4 trans_mat){
+	is_transformed = true;
+
+	trans = trans_mat;
+	inv_trans = glm::inverse(trans_mat);
+}
+
 glm::vec3 Sphere::getAmbient(){
 	return k_ambient;
 }
@@ -70,8 +84,20 @@ glm::vec3 Sphere::getReflect(){
 	return k_reflect;
 }
 
+glm::mat4 Sphere::getTransform(){
+	return trans;
+}
+
 glm::vec3 Sphere::getNormal(glm::vec3 point){
 	glm::vec3 normal = (point - position) / radius;
+
+	if(is_transformed){
+		glm::vec4 temp_normal = glm::vec4(normal, 1.0f);
+
+		temp_normal = inv_trans * temp_normal;
+
+		normal = temp_normal.xyz();
+	}
 
 	return normal;
 }
@@ -79,6 +105,20 @@ glm::vec3 Sphere::getNormal(glm::vec3 point){
 float Sphere::intersect(Ray* cam_ray){
 	glm::vec3 ray_dir = cam_ray->getDirection();
 	glm::vec3 ray_pos = cam_ray->getPosition();
+
+	if(is_transformed){
+		glm::vec4 temp_dir = glm::vec4(ray_dir, 1.0f);
+		glm::vec4 temp_pos = glm::vec4(ray_pos, 1.0f);
+
+		temp_dir = inv_trans * temp_dir;
+		temp_pos = inv_trans * temp_pos;
+
+		ray_dir = temp_dir.xyz();
+		ray_pos = temp_pos.xyz();
+	}
+
+	// glm::vec3 ray_dir = cam_ray->getDirection();
+	// glm::vec3 ray_pos = cam_ray->getPosition();
 
 	float descriminant = sqrt(pow(glm::dot(ray_dir, (ray_pos - position)), 2) - glm::dot(ray_dir, ray_dir) * (glm::dot(ray_pos - position, ray_pos - position) - pow(radius, 2)));
 

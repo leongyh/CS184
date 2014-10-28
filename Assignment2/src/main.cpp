@@ -40,8 +40,8 @@ using namespace std;
 //****************************************************
 int main(int argc, char *argv[]) {
   Scene* scene = new Scene();
-
-  Reader* reader = new Reader("scene.xml", "3");
+  
+  Reader* reader = new Reader("scene.xml", argv[1]);
   reader->parse(*scene);
   scene->render();
 
