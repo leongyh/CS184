@@ -18,6 +18,7 @@ class Sphere{
 
 	glm::mat4 trans;
 	glm::mat4 inv_trans;
+	glm::mat4 t_inv_trans;
 	bool is_transformed;
 
 	public:
@@ -32,6 +33,7 @@ class Sphere{
 		void setReflect(glm::vec3 kr);
 		void setTransform(glm::mat4 trans_mat);
 
+		bool isTransformed();
 		glm::vec3 getAmbient();
 		glm::vec3 getDiffuse();
 		glm::vec3 getSpecular();

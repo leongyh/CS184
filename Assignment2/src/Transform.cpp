@@ -36,11 +36,25 @@ void Transform::pushScale(float x, float y, float z){
 
 void Transform::pushRotate(float x, float y, float z){
 	glm::vec3 r = glm::vec3(x, y, z);
+	float degrees = glm::length(r);
 	float angle = glm::radians(glm::length(r));
-	glm::mat4 m = glm::rotate(angle, r);
 
-	// matrices.push(m);
-	transformation = m * transformation;
+	if(angle != 0){
+		r = glm::normalize(r);
+		glm::mat4 m = glm::rotate(angle, r);
+
+		printf("%f %f %f %f\n", r.x, r.y, r.z, degrees);
+		// int i,j;
+	 //  	for (j=0; j<4; j++){
+	 //    	for (i=0; i<4; i++){
+	 //    		printf("%f ",m[i][j]);
+	 //  		}
+	 //  		printf("\n");
+	 // 	}
+
+		// matrices.push(m);
+		transformation = m * transformation;
+	}
 }
 
 // void Transform::popMatrix(){

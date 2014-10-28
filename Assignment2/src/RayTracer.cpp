@@ -1,3 +1,5 @@
+#define GLM_SWIZZLE
+
 #include "RayTracer.h"
 #include <cstdlib>
 #include <cstdio>
@@ -72,6 +74,16 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 	//begin shading calculations
 	glm::vec3 point = cam_ray->getPoint(smallest_t);
 	glm::vec3 normal = closest_sphere->getNormal(point);
+
+	if(closest_sphere->isTransformed()){
+		glm::mat4 t_mat = closest_sphere->getTransform();
+		glm::vec4 temp_point = glm::vec4(point, 0.0f);
+
+		temp_point = t_mat * temp_point;
+
+		point = temp_point.xyz();
+	}
+
 	
 	// closest_sphere->print();
 	// printf("%f %f %f\n", point.x, point.y, point.z);
@@ -116,6 +128,7 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 			glm::vec3 rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_sphere->getDiffuse());
 
 	        glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere->getSpecular(), closest_sphere->getSpecularPow(), cam_ray);
+	        // glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere, cam_ray);
 
 	        glm::vec3 rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
 
@@ -215,6 +228,29 @@ glm::vec3 RayTracer::calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm
 	//reflected
 	glm::vec3 r_vec = glm::normalize((-1.0f * incident) + (2.0f * glm::dot(incident, normal) * normal));
 	float dot_pow = pow(std::max(0.0f, glm::dot(r_vec, view_ray->getReverseDirection())), sp);
+
+	//half-angle
+	// glm::vec3 h_vec = glm::normalize(incident + view_ray->getReverseDirection());
+ 	// float dot_pow = pow(std::max(0.0f, glm::dot(normal, h_vec)), (int) shading_attr["pow_specular"].x);
+
+	float r = std::max(ks.x * intensity.x * dot_pow, 0.0f);
+	float g = std::max(ks.y * intensity.y * dot_pow, 0.0f);
+	float b = std::max(ks.z * intensity.z * dot_pow, 0.0f);
+
+	return glm::vec3(r, g, b);
+}
+
+glm::vec3 RayTracer::calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, Sphere* sph, Ray* view_ray){
+	glm::vec3 ks = sph->getSpecular();
+	int sp = sph->getSpecularPow();
+
+	//reflected
+	glm::vec3 r_vec = glm::normalize((-1.0f * incident) + (2.0f * glm::dot(incident, normal) * normal));
+	glm::mat4 t_mat = sph->getTransform();
+	glm::vec4 vr = glm::vec4(view_ray->getDirection(), 0.0f);
+	glm::vec3 vr_trans = (t_mat * vr).xyz();
+	glm::vec3 neg_vr_trans = -1.0f * vr_trans;
+	float dot_pow = pow(std::max(0.0f, glm::dot(r_vec, neg_vr_trans)), sp);
 
 	//half-angle
 	// glm::vec3 h_vec = glm::normalize(incident + view_ray->getReverseDirection());

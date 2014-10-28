@@ -172,7 +172,6 @@ void Reader::parse(Scene& scene){
 									std::stringstream scale(trans_params.child_value());
 									scale >> x, scale >> y, scale >> z;
 									t->pushScale(x, y, z);
-									t->print();
 								} else if(strcmp(trans_params.name(), "rot") == 0){
 									// printf("%s\n", trans_params.child_value());
 									float x, y, z;
@@ -181,7 +180,7 @@ void Reader::parse(Scene& scene){
 									t->pushRotate(x, y, z);
 								}
 							}
-
+							t->print();
 							sph->setTransform(t->getTransform());
 						}
 					}

@@ -25,6 +25,7 @@ class RayTracer{
 		glm::vec3 traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth, int current_depth);
 		glm::vec3 calculateDiffusion(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, glm::vec3 kd);
 		glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, glm::vec3 ks, int sp, Ray* view_ray);
+		glm::vec3 calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, Sphere* sph, Ray* view_ray);
 		glm::vec3 calculateAmbient(glm::vec3 intensity, glm::vec3 ka);
 };
 

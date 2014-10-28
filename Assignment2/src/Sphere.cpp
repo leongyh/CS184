@@ -62,6 +62,19 @@ void Sphere::setTransform(glm::mat4 trans_mat){
 
 	trans = trans_mat;
 	inv_trans = glm::inverse(trans_mat);
+	t_inv_trans = glm::transpose(inv_trans);
+
+	int i,j;
+  	for (j=0; j<4; j++){
+    	for (i=0; i<4; i++){
+    		printf("%f ",inv_trans[i][j]);
+  		}
+  		printf("\n");
+ 	}
+}
+
+bool Sphere::isTransformed(){
+	return is_transformed;
 }
 
 glm::vec3 Sphere::getAmbient(){
@@ -92,11 +105,17 @@ glm::vec3 Sphere::getNormal(glm::vec3 point){
 	glm::vec3 normal = (point - position) / radius;
 
 	if(is_transformed){
-		glm::vec4 temp_normal = glm::vec4(normal, 1.0f);
+		glm::vec4 temp_normal = glm::vec4(normal, 0.0f);
 
-		temp_normal = inv_trans * temp_normal;
+		temp_normal = t_inv_trans * temp_normal;
 
-		normal = temp_normal.xyz();
+		normal = glm::normalize(temp_normal.xyz());
+
+		// int i;
+  //   	for (i=0; i<4; i++){
+  //   		printf("%f ",temp_normal[i]);
+  // 		}
+  // 		printf("\n");
 	}
 
 	return normal;
@@ -106,16 +125,31 @@ float Sphere::intersect(Ray* cam_ray){
 	glm::vec3 ray_dir = cam_ray->getDirection();
 	glm::vec3 ray_pos = cam_ray->getPosition();
 
+	// int i;
+	// for (i=0; i<3; i++){
+	// 	printf("+++%f ",cam_ray->getDirection()[i]);
+	// }
+	// printf("\n");
+
 	if(is_transformed){
-		glm::vec4 temp_dir = glm::vec4(ray_dir, 1.0f);
-		glm::vec4 temp_pos = glm::vec4(ray_pos, 1.0f);
+		glm::vec4 temp_dir = glm::vec4(ray_dir, 0.0f);
+		glm::vec4 temp_pos = glm::vec4(ray_pos, 0.0f);
 
 		temp_dir = inv_trans * temp_dir;
 		temp_pos = inv_trans * temp_pos;
 
-		ray_dir = temp_dir.xyz();
+		ray_dir = glm::normalize(temp_dir.xyz());
 		ray_pos = temp_pos.xyz();
 	}
+	
+	// for (i=0; i<3; i++){
+	// 	printf("%f ",ray_dir[i]);
+	// }
+	// printf("\n");
+	// for (i=0; i<3; i++){
+	// 	printf("***%f ",cam_ray->getDirection()[i]);
+	// }
+	// printf("\n");
 
 	// glm::vec3 ray_dir = cam_ray->getDirection();
 	// glm::vec3 ray_pos = cam_ray->getPosition();
