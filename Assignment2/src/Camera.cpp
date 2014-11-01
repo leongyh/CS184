@@ -2,12 +2,12 @@
 #include <cstdlib>
 #include <cstdio>
 
-Camera::Camera(float x, float y, float z, float view_x, float view_y, float view_z, float vert_x, float vert_y, float vert_z, float d){
+Camera::Camera(float x, float y, float z, float llx, float lly, float llz, float lrx, float lry, float lrz, float ulx, float uly, float ulz, float urx, float ury, float urz){
 	position = glm::vec3(x, y, z);
-	view = glm::vec3(view_x, view_y, view_z);
-	vertical = glm::vec3(vert_x, vert_y, vert_z);
-	horizontal = glm::cross(-1.0f * view, vertical);
-	depth = d;
+	ll = glm::vec3(llx, lly, llz);
+	lr = glm::vec3(lrx, lry, lrz);
+	ul = glm::vec3(ulx, uly, ulz);
+	ur = glm::vec3(urx, ury, urz);
 }
 
 Camera::~Camera(){
@@ -18,13 +18,18 @@ Ray* Camera::emitRay(Sample* s){
 	float u = s->getU();
 	float v = s->getV();
 
-	glm::vec3 direction = depth * view + u * horizontal + v * vertical;
+	glm::vec3 direction = (u * (v * ll + (1-v) * ul) + (1-u) * (v * lr + (1-v) * ur)) - position;
+
+	// u * (lr - ll);
+	// v * (ur - ul);
 
 	Ray* r = new Ray(position.x, position.y, position.z, direction.x, direction.y, direction.z);
+	// printf("ul is (%f,%f,%f)\n", ul.x, ul.y, ul.z);
+	// r->print();
 
 	return r;
 }
 
 void Camera::print(){
-	printf("The Camera coordinates are (%f,%f,%f) with view vector (%f,%f,%f) and vertical vector (%f,%f,%f) and horizontal vector (%f,%f,%f) with depth=%f\n", position.x, position.y, position.z, view.x, view.y, view.z, vertical.x, vertical.y, vertical.z, horizontal.x, horizontal.y, horizontal.z, depth);
+	printf("The Camera coordinates are (%f,%f,%f)\n", position.x, position.y, position.z);
 }

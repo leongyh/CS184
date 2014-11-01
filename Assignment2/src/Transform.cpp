@@ -23,57 +23,44 @@ Transform::~Transform(){
 void Transform::pushTranslate(float x, float y, float z){
 	glm::mat4 m = glm::translate(glm::vec3(x, y, z));
 
-	// matrices.push(m);
-	transformation = m * transformation;
+	transformation = transformation * m;
 }
 
 void Transform::pushScale(float x, float y, float z){
 	glm::mat4 m = glm::scale(glm::vec3(x, y, z));
 
-	// matrices.push(m);
-	transformation = m * transformation;
+	transformation = transformation * m;
 }
 
 void Transform::pushRotate(float x, float y, float z){
 	glm::vec3 r = glm::vec3(x, y, z);
-	float degrees = glm::length(r);
 	float angle = glm::radians(glm::length(r));
 
-	if(angle != 0){
+	if(angle != 0.0f){
 		r = glm::normalize(r);
-		glm::mat4 m = glm::rotate(angle, r);
+		// glm::mat3 r_outer = glm::outerProduct(r, r);
+		glm::mat3 r_cross =  glm::matrixCross3(r);
 
-		printf("%f %f %f %f\n", r.x, r.y, r.z, degrees);
+		glm::mat3 rot = glm::mat3(1.0f) + (glm::sin(angle) * r_cross) + ((1 - glm::cos(angle)) * (r_cross * r_cross));
+		glm::mat4 m = glm::mat4(rot);
+
+		transformation = transformation * m;
+
 		// int i,j;
-	 //  	for (j=0; j<4; j++){
-	 //    	for (i=0; i<4; i++){
-	 //    		printf("%f ",m[i][j]);
-	 //  		}
-	 //  		printf("\n");
-	 // 	}
-
-		// matrices.push(m);
-		transformation = m * transformation;
+		// for (j=0; j<4; j++){
+		// 	for (i=0; i<4; i++){
+		// 		printf("%f ",m[i][j]);
+		// 	}
+		// 	printf("\n");
+		// }
 	}
 }
-
-// void Transform::popMatrix(){
-// 	while(!matrices.empty()){
-// 		glm::mat4 m = matrices.pop();
-
-// 		transformation = m * transformation;
-// 	}
-// }
 
 void Transform::resetTransform(){
 	transformation = glm::mat4(1.0f);
 }
 
 glm::mat4 Transform::getTransform(){
-	// if(matrices.empty()){
-	// 	this->popMatrix();
-	// }
-
 	return transformation;
 }
 

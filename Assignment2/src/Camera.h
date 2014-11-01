@@ -7,14 +7,10 @@
 
 class Camera{
 	glm::vec3 position;
-	glm::vec3 view;
-	glm::vec3 horizontal;
-	glm::vec3 vertical;
-
-	float depth;
+	glm::vec3 ll, lr, ul, ur;
 
 	public:
-		Camera(float x, float y, float z, float view_x, float view_y, float view_z, float vert_x, float vert_y, float vert_z, float d);
+		Camera(float x, float y, float z, float llx, float lly, float llz, float lrx, float lry, float lrz, float ulx, float uly, float ulz, float urx, float ury, float urz);
 		virtual ~Camera();
 
 		Ray* emitRay(Sample* s);

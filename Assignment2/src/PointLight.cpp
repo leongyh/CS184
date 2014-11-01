@@ -2,11 +2,19 @@
 #include <cstdlib>
 #include <ctime>
 #include <cstdio>
+#include <cmath>
 
 
-PointLight::PointLight(float x, float y, float z, float centerX, float centerY, float centerZ, float scale, float r, float g, float b){
-	position = glm::vec3(x * scale + centerX, y * scale + centerY, z * scale + centerZ);
+PointLight::PointLight(float x, float y, float z, float r, float g, float b){
+	position = glm::vec3(x, y, z);
 	color = glm::vec3(r, g, b);
+	falloff = 0;
+}
+
+PointLight::PointLight(float x, float y, float z, float r, float g, float b, int f){
+	position = glm::vec3(x, y, z);
+	color = glm::vec3(r, g, b);
+	falloff = f;
 }
 
 PointLight::PointLight(const PointLight& obj){
@@ -30,12 +38,19 @@ glm::vec3 PointLight::getPosition(){
 	return position;
 }
 
-glm::vec3 PointLight::getColor(){
-	return color;
+glm::vec3 PointLight::getColor(glm::vec3 point){
+	if(falloff == 0){
+		return color;
+	} else{
+		float length = glm::length(position - point);
+		float fall_pow = std::pow(length, falloff);
+
+		return color / fall_pow;
+	}
 }
 
 glm::vec3 PointLight::getLightVec(glm::vec3 point){
-	return -1.0f * glm::normalize(point - position);
+	return glm::normalize(position - point);
 }
 
 void PointLight::print(){

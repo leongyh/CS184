@@ -14,9 +14,40 @@ RayTracer::~RayTracer(){
 
 }
 
-Color* RayTracer::traceSimple(Ray* cam_ray, std::vector<Sphere*>& spheres){
+// Color* RayTracer::traceSimple(Ray* cam_ray, std::vector<Sphere*>& spheres){
+// 	//find intersect on all geometries first
+// 	Sphere* closest_sphere;
+// 	float smallest_t = -1.0f;
+
+// 	for(int i = 0; i < spheres.size(); i++){
+// 		Sphere* sphere = spheres[i];
+
+// 		float t = sphere->intersect(cam_ray);
+
+// 		if(t >= 0.0f){
+// 			if(smallest_t < 0.0f){
+// 				closest_sphere = sphere;
+// 				smallest_t = t;
+// 			} else if(t < smallest_t){
+// 				closest_sphere = sphere;
+// 				smallest_t = t;
+// 			}
+// 		}
+// 	}
+
+// 	//paint red for simple test
+// 	if(smallest_t < 0.0f){
+// 		return new Color(0.0f, 0.0f, 0.0f);
+// 	} else{
+// 		return new Color(1.0f, 0.0f, 0.0f);
+// 	}
+// }
+
+glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<Triangle*>& triangles, std::vector<AmbientLight*>& amb_lights, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth, int current_depth){
 	//find intersect on all geometries first
+	int closest_type = -1; //-1 no object, 0 sphere, 1 triangle; quick hack
 	Sphere* closest_sphere;
+	Triangle* closest_triangle;
 	float smallest_t = -1.0f;
 
 	for(int i = 0; i < spheres.size(); i++){
@@ -28,40 +59,29 @@ Color* RayTracer::traceSimple(Ray* cam_ray, std::vector<Sphere*>& spheres){
 			if(smallest_t < 0.0f){
 				closest_sphere = sphere;
 				smallest_t = t;
+				closest_type = 0;
 			} else if(t < smallest_t){
 				closest_sphere = sphere;
 				smallest_t = t;
+				closest_type = 0;
 			}
 		}
 	}
 
-	//paint red for simple test
-	if(smallest_t < 0.0f){
-		return new Color(0.0f, 0.0f, 0.0f);
-	} else{
-		return new Color(1.0f, 0.0f, 0.0f);
-	}
-}
+	for(int i = 0; i < triangles.size(); i++){
+		Triangle* triangle = triangles[i];
 
-glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth, int current_depth){
-	// printf("%s\n", "Start");
-
-	//find intersect on all geometries first
-	Sphere* closest_sphere;
-	float smallest_t = -1.0f;
-
-	for(int i = 0; i < spheres.size(); i++){
-		Sphere* sphere = spheres[i];
-
-		float t = sphere->intersect(cam_ray);
+		float t = triangle->intersect(cam_ray);
 
 		if(t >= 0.0f){
 			if(smallest_t < 0.0f){
-				closest_sphere = sphere;
+				closest_triangle = triangle;
 				smallest_t = t;
+				closest_type = 1;
 			} else if(t < smallest_t){
-				closest_sphere = sphere;
+				closest_triangle = triangle;
 				smallest_t = t;
+				closest_type = 1;
 			}
 		}
 	}
@@ -73,25 +93,33 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 
 	//begin shading calculations
 	glm::vec3 point = cam_ray->getPoint(smallest_t);
-	glm::vec3 normal = closest_sphere->getNormal(point);
+	glm::vec3 normal;
 
-	if(closest_sphere->isTransformed()){
-		glm::mat4 t_mat = closest_sphere->getTransform();
-		glm::vec4 temp_point = glm::vec4(point, 0.0f);
-
-		temp_point = t_mat * temp_point;
-
-		point = temp_point.xyz();
+	if(closest_type == 0){
+		normal = closest_sphere->getNormal(point);
+	} else if(closest_type == 1){
+		normal = closest_triangle->getNormal(point);
 	}
-
 	
-	// closest_sphere->print();
-	// printf("%f %f %f\n", point.x, point.y, point.z);
-
 	//color components
 	float r = 0.0f;
 	float g = 0.0f;
 	float b = 0.0f;
+
+	for(int num_al = 0; num_al < amb_lights.size(); num_al++){
+		glm::vec3 intensity = (amb_lights[num_al])->getColor();
+		glm::vec3 rgbAmbient;
+
+		if(closest_type == 0){
+			rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+		} else if(closest_type == 1){
+			rgbAmbient = calculateAmbient(intensity, closest_triangle->getAmbient());
+		}
+
+		r += rgbAmbient.x;
+		g += rgbAmbient.y;
+		b += rgbAmbient.z;
+	}
 
 	for(int num_dl = 0; num_dl < dir_lights.size(); num_dl++){
 		glm::vec3 incident = (dir_lights[num_dl])->getReverseDirection();
@@ -107,76 +135,125 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 			float t = sphere->intersect(shadow_ray);
 
 			if(t > 0.0f){
-				// delete dir_ray;
 				isShadowed = true;
 				break;
 			} else if(closest_sphere == sphere){
 				continue;
 			}
 		}
+		
+		for(int i = 0; i < triangles.size(); i++){
+			Triangle* tri = triangles[i];
 
-		// delete dir_ray;
+			float t = tri->intersect(shadow_ray);
+
+			if(t > 0.0f){
+				isShadowed = true;
+				break;
+			} else if(closest_triangle == tri){
+				continue;
+			}
+		}
 
 		if(isShadowed){
-	        glm::vec3 rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+			glm::vec3 rgbAmbient;
 
-	        r += rgbAmbient.x;
-	        g += rgbAmbient.y;
-	        b += rgbAmbient.z;
+			if(closest_type == 0){
+				rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+			} else if(closest_type == 1){
+				rgbAmbient = calculateAmbient(intensity, closest_triangle->getAmbient());
+			}
+
+			r += rgbAmbient.x;
+			g += rgbAmbient.y;
+			b += rgbAmbient.z;
 		} else{
 			//else do shading
-			glm::vec3 rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_sphere->getDiffuse());
+			glm::vec3 rgbDiffusion;
+			glm::vec3 rgbSpecular;
+			glm::vec3 rgbAmbient;
 
-	        glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere->getSpecular(), closest_sphere->getSpecularPow(), cam_ray);
-	        // glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere, cam_ray);
+			 if(closest_type == 0){
+				rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_sphere->getDiffuse());
+				rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere->getSpecular(), closest_sphere->getSpecularPow(), cam_ray);
+				rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+			} else if(closest_type == 1){
+				rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_triangle->getDiffuse());
+				rgbSpecular = calculateSpecular(normal, incident, intensity, closest_triangle->getSpecular(), closest_triangle->getSpecularPow(), cam_ray);
+				rgbAmbient = calculateAmbient(intensity, closest_triangle->getAmbient());
+			}
 
-	        glm::vec3 rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
-
-	        r += rgbDiffusion.x + rgbSpecular.x + rgbAmbient.x;
-	        g += rgbDiffusion.y + rgbSpecular.y + rgbAmbient.y;
-	        b += rgbDiffusion.z + rgbSpecular.z + rgbAmbient.z;
+			r += rgbDiffusion.x + rgbSpecular.x + rgbAmbient.x;
+			g += rgbDiffusion.y + rgbSpecular.y + rgbAmbient.y;
+			b += rgbDiffusion.z + rgbSpecular.z + rgbAmbient.z;
 		}
 	}
 	
 	for(int num_pl = 0; num_pl < pnt_lights.size(); num_pl++){
 		glm::vec3 incident = (pnt_lights[num_pl])->getLightVec(point);
-		glm::vec3 intensity = (pnt_lights[num_pl])->getColor();
+		glm::vec3 intensity = (pnt_lights[num_pl])->getColor(point);
 
 		//find shadows, skip iteration
-		Ray* dir_ray = new Ray(point, incident);
+		Ray* shadow_ray = new Ray(point, incident);
 		bool isShadowed = false;
 
 		for(int i = 0; i < spheres.size(); i++){
 			Sphere* sphere = spheres[i];
 
-			float t = sphere->intersect(dir_ray);
+			float t = sphere->intersect(shadow_ray);
 
-			if(t > 0.0f || closest_sphere == sphere){
-				// delete dir_ray;
+			if(t > 0.0f){
 				isShadowed = true;
+				break;
+			} else if(closest_sphere == sphere){
+				continue;
+			}
+		}
+		
+		for(int i = 0; i < triangles.size(); i++){
+			Triangle* tri = triangles[i];
+
+			float t = tri->intersect(shadow_ray);
+
+			if(t > 0.0f){
+				isShadowed = true;
+				break;
+			} else if(closest_triangle == tri){
 				continue;
 			}
 		}
 
-		// delete dir_ray;
-
 		if(isShadowed){
-	        glm::vec3 rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+			glm::vec3 rgbAmbient;
 
-	        r += rgbAmbient.x;
-	        g += rgbAmbient.y;
-	        b += rgbAmbient.z;
+			if(closest_type == 0){
+				rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+			} else if(closest_type == 1){
+				rgbAmbient = calculateAmbient(intensity, closest_triangle->getAmbient());
+			}
+
+			r += rgbAmbient.x;
+			g += rgbAmbient.y;
+			b += rgbAmbient.z;
 		} else{
 			//else do shading
-			glm::vec3 rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_sphere->getDiffuse());
+			glm::vec3 rgbDiffusion;
+			glm::vec3 rgbSpecular;
+			glm::vec3 rgbAmbient;
 
-	        glm::vec3 rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere->getSpecular(), closest_sphere->getSpecularPow(), cam_ray);
+			 if(closest_type == 0){
+				rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_sphere->getDiffuse());
+				rgbSpecular = calculateSpecular(normal, incident, intensity, closest_sphere->getSpecular(), closest_sphere->getSpecularPow(), cam_ray);
+				rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
+			} else if(closest_type == 1){
+				rgbDiffusion = calculateDiffusion(normal, incident, intensity, closest_triangle->getDiffuse());
+				rgbSpecular = calculateSpecular(normal, incident, intensity, closest_triangle->getSpecular(), closest_triangle->getSpecularPow(), cam_ray);
+				rgbAmbient = calculateAmbient(intensity, closest_triangle->getAmbient());
+			}
 
-	        glm::vec3 rgbAmbient = calculateAmbient(intensity, closest_sphere->getAmbient());
-
-	        r += rgbDiffusion.x + rgbSpecular.x + rgbAmbient.x;
-	        g += rgbDiffusion.y + rgbSpecular.y + rgbAmbient.y;
-	        b += rgbDiffusion.z + rgbSpecular.z + rgbAmbient.z;
+			r += rgbDiffusion.x + rgbSpecular.x + rgbAmbient.x;
+			g += rgbDiffusion.y + rgbSpecular.y + rgbAmbient.y;
+			b += rgbDiffusion.z + rgbSpecular.z + rgbAmbient.z;
 		}
 	}
 
@@ -184,17 +261,21 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 	g = std::min(1.0f, g);
 	b = std::min(1.0f, b);
 
-	// return glm::vec3(r, g, b);
-
 	// reflection recursion
 	if(current_depth < max_depth){
 		glm::vec3 inc_ray_dir = cam_ray->getDirection();
 		glm::vec3 refl_dir = inc_ray_dir - 2 * glm::dot(inc_ray_dir, normal) * normal;
 		Ray* refl_ray = new Ray(point, refl_dir);
 
-		glm::vec3 refl_color = traceRecursion(refl_ray, spheres, dir_lights, pnt_lights, max_depth, current_depth + 1);
+		glm::vec3 refl_color = traceRecursion(refl_ray, spheres, triangles, amb_lights, dir_lights, pnt_lights, max_depth, current_depth + 1);
 
-		glm::vec3 kr = closest_sphere->getReflect();
+		glm::vec3 kr;
+
+		if(closest_type == 0){
+			kr = closest_sphere->getReflect();
+		} else if(closest_type == 1){
+			kr = closest_triangle->getReflect();
+		}
 
 		float refl_r = std::min(1.0f, r + refl_color.x * kr.x);
 		float refl_g = std::min(1.0f, g + refl_color.y * kr.y);
@@ -206,10 +287,10 @@ glm::vec3 RayTracer::traceRecursion(Ray* cam_ray, std::vector<Sphere*>& spheres,
 	}
 }
 
-Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth){
+Color* RayTracer::trace(Ray* cam_ray, std::vector<Sphere*>& spheres, std::vector<Triangle*>& triangles, std::vector<AmbientLight*>& amb_lights, std::vector<DirectionalLight*>& dir_lights, std::vector<PointLight*>& pnt_lights, int max_depth){
 	int current_depth = 0;
 
-	glm::vec3 pixelRGB = traceRecursion(cam_ray, spheres, dir_lights, pnt_lights, max_depth, current_depth);
+	glm::vec3 pixelRGB = traceRecursion(cam_ray, spheres, triangles, amb_lights, dir_lights, pnt_lights, max_depth, current_depth);
 
 	return new Color(pixelRGB);
 }
@@ -227,34 +308,11 @@ glm::vec3 RayTracer::calculateDiffusion(glm::vec3 normal, glm::vec3 incident, gl
 glm::vec3 RayTracer::calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, glm::vec3 ks, int sp, Ray* view_ray){
 	//reflected
 	glm::vec3 r_vec = glm::normalize((-1.0f * incident) + (2.0f * glm::dot(incident, normal) * normal));
-	float dot_pow = pow(std::max(0.0f, glm::dot(r_vec, view_ray->getReverseDirection())), sp);
+	float dot_pow = pow(std::max(0.0f, glm::dot(r_vec, glm::normalize(view_ray->getReverseDirection()))), sp);
 
 	//half-angle
 	// glm::vec3 h_vec = glm::normalize(incident + view_ray->getReverseDirection());
- 	// float dot_pow = pow(std::max(0.0f, glm::dot(normal, h_vec)), (int) shading_attr["pow_specular"].x);
-
-	float r = std::max(ks.x * intensity.x * dot_pow, 0.0f);
-	float g = std::max(ks.y * intensity.y * dot_pow, 0.0f);
-	float b = std::max(ks.z * intensity.z * dot_pow, 0.0f);
-
-	return glm::vec3(r, g, b);
-}
-
-glm::vec3 RayTracer::calculateSpecular(glm::vec3 normal, glm::vec3 incident, glm::vec3 intensity, Sphere* sph, Ray* view_ray){
-	glm::vec3 ks = sph->getSpecular();
-	int sp = sph->getSpecularPow();
-
-	//reflected
-	glm::vec3 r_vec = glm::normalize((-1.0f * incident) + (2.0f * glm::dot(incident, normal) * normal));
-	glm::mat4 t_mat = sph->getTransform();
-	glm::vec4 vr = glm::vec4(view_ray->getDirection(), 0.0f);
-	glm::vec3 vr_trans = (t_mat * vr).xyz();
-	glm::vec3 neg_vr_trans = -1.0f * vr_trans;
-	float dot_pow = pow(std::max(0.0f, glm::dot(r_vec, neg_vr_trans)), sp);
-
-	//half-angle
-	// glm::vec3 h_vec = glm::normalize(incident + view_ray->getReverseDirection());
- 	// float dot_pow = pow(std::max(0.0f, glm::dot(normal, h_vec)), (int) shading_attr["pow_specular"].x);
+	// float dot_pow = pow(std::max(0.0f, glm::dot(normal, h_vec)), (int) shading_attr["pow_specular"].x);
 
 	float r = std::max(ks.x * intensity.x * dot_pow, 0.0f);
 	float g = std::max(ks.y * intensity.y * dot_pow, 0.0f);

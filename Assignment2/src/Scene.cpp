@@ -3,38 +3,13 @@
 #include <cstdio>
 
 Scene::Scene(){
-	//dimension for testing purposes. put as constructor params later
-	// int width = 200;
-	// int height = 200;
-
-	// camera = new Camera(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, 1.0f);
-	// sampler = new Sampler(width, height, -1.0f, 1.0f, 1.0f, -1.0f);
 	tracer = new RayTracer();
-	// image = new Film(width, height, "/home/h/test.png");
+	recursion_depth = 5;
+}
 
-	//test scene
-	// shading_attr["k_ambient"] = glm::vec3(0.0f, 0.0f, 0.0f);
-	// shading_attr["k_specular"] = glm::vec3(1.0f, 1.0f, 1.0f);
-	// shading_attr["k_diffuse"] = glm::vec3(0.0f, 0.0f, 0.0f);
-	// shading_attr["k_reflect"] = glm::vec3(0.0f, 0.0f, 0.0f);
-	// shading_attr["pow_specular"] = glm::vec3(20.0f, 0.0f, 0.0f);
-
-	// Sphere* s = new Sphere(0.0f, 0.0f, -0.5f, 1.0f);
-
-	// spheres.reserve(1);
-	// spheres.push_back(*s);
-
-	// 200 200 200 0.4 0.8 1.0 -kd 0.7 0.4 0.5
-	// -pl 200 200 200 0.4 0.8 1.0 -kd 0.7 0.4 0.5 -ks 1.0 1.0 1.0 -sp 20
-	// -pl 200 200 200 0.8 0.8 0.8 -ks 1.0 1.0 1.0 -sp 20 
-
-	// DirectionalLight* dl = new DirectionalLight(-0.5f, -0.3f, -0.9f, 0.8f, 0.8f, 0.8f);
-	// dir_lights.reserve(1);
-	// dir_lights.push_back(*dl);
-
-	// PointLight* pl = new PointLight(0.0f, 0.0f, 200.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.8f, 0.8f, 0.8f);
-	// pnt_lights.reserve(1);
-	// pnt_lights.push_back(*pl);
+Scene::Scene(int depth){
+	tracer = new RayTracer();
+	recursion_depth = depth;
 }
 
 Scene::~Scene(){
@@ -46,8 +21,12 @@ void Scene::defineCamera(Camera* cam){
 }
 
 void Scene::defineImage(int w, int h, const std::string file_loc){
-	sampler = new Sampler(w, h, -1.0f, 1.0f, 1.0f, -1.0f);
+	sampler = new Sampler(w, h, 0.0f, 1.0f, 1.0f, 0.0f);
 	image = new Film(w, h, file_loc);
+}
+
+void Scene::insertAmbientLight(AmbientLight* al){
+	amb_lights.push_back(al);
 }
 
 void Scene::insertDirectionalLight(DirectionalLight* dl){
@@ -60,6 +39,10 @@ void Scene::insertPointLight(PointLight* pl){
 
 void Scene::insertSphere(Sphere* sphere){
 	spheres.push_back(sphere);
+}
+
+void Scene::insertTriangle(Triangle* tri){
+	triangles.push_back(tri);
 }
 
 void Scene::render(){
@@ -76,7 +59,7 @@ void Scene::render(){
 		// r->print();
 
 		// Color* c = tracer->trace(r, spheres);
-		Color* c = tracer->trace(r, spheres, dir_lights, pnt_lights, 5);
+		Color* c = tracer->trace(r, spheres, triangles, amb_lights, dir_lights, pnt_lights, recursion_depth);
 		// c->print();
 		
 		image->addPixel(s, c);

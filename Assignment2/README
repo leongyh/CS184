@@ -14,12 +14,26 @@ I had too many library files.
 
 Libraries Included: 
 GLM
-GLUT
+pugixml
+lodePNG
 
 
 Instructions: 
 Run make to compile. Run ./as2 <params>
 
+<params> are as follows:
+-f <file input dir>
+-dim <image width> <image height>
+-img <image file out dir>
+-d <recursion depth; 5 default>
+
+IMPORTANT:
+Inthe the input file, under the obj input, the 2nd parameter is an optional int based on the format of the input file given. Default value is 1. Formats are:
+
+0 			%d %d %d
+1 			%d//%d %d//%d %d//%d
 
 Extra Credit:
 ---------------------
+Simple XML Reader:
+I built a XML reader using the pugixml library, before I realized that we had a specified input file. I found XML to be more nicely formatted that allowed material coefficients and transformations to be applied specifically to an object. Doesn't work importing obj files though.

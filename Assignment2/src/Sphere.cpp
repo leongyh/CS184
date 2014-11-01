@@ -58,19 +58,33 @@ void Sphere::setReflect(glm::vec3 kr){
 }
 
 void Sphere::setTransform(glm::mat4 trans_mat){
-	is_transformed = true;
+	glm::mat4 tlt_mat, inv_tlt_mat;
+
+	//center object first
+	// if(glm::length(position) > 0.0f){
+	// 	tlt_mat = glm::translate(position);
+	// 	inv_tlt_mat = glm::inverse(tlt_mat);
+		
+	// 	// printf("%s\n", "hi");
+	// 	trans = tlt_mat * trans_mat * inv_tlt_mat;
+	// } else {
+	// 	trans = trans_mat;
+	// }
 
 	trans = trans_mat;
-	inv_trans = glm::inverse(trans_mat);
+
+	inv_trans = glm::inverse(trans);
 	t_inv_trans = glm::transpose(inv_trans);
 
-	int i,j;
-  	for (j=0; j<4; j++){
-    	for (i=0; i<4; i++){
-    		printf("%f ",inv_trans[i][j]);
-  		}
-  		printf("\n");
- 	}
+	is_transformed = true;
+
+	// int i,j;
+ //  	for (j=0; j<4; j++){
+ //    	for (i=0; i<4; i++){
+ //    		printf("%f ", inv_tlt_mat[i][j]);
+ //  		}
+ //  		printf("\n");
+ // 	}
 }
 
 bool Sphere::isTransformed(){
@@ -102,9 +116,15 @@ glm::mat4 Sphere::getTransform(){
 }
 
 glm::vec3 Sphere::getNormal(glm::vec3 point){
-	glm::vec3 normal = (point - position) / radius;
+	glm::vec3 normal;
 
 	if(is_transformed){
+		glm::vec4 temp = glm::vec4(point, 1.0f);
+		temp = inv_trans * temp;
+
+		glm::vec3 trans_point = temp.xyz();
+		normal = (trans_point - position) / radius;
+
 		glm::vec4 temp_normal = glm::vec4(normal, 0.0f);
 
 		temp_normal = t_inv_trans * temp_normal;
@@ -116,6 +136,8 @@ glm::vec3 Sphere::getNormal(glm::vec3 point){
   //   		printf("%f ",temp_normal[i]);
   // 		}
   // 		printf("\n");
+	} else{
+		normal = (point - position) / radius;
 	}
 
 	return normal;
@@ -125,35 +147,17 @@ float Sphere::intersect(Ray* cam_ray){
 	glm::vec3 ray_dir = cam_ray->getDirection();
 	glm::vec3 ray_pos = cam_ray->getPosition();
 
-	// int i;
-	// for (i=0; i<3; i++){
-	// 	printf("+++%f ",cam_ray->getDirection()[i]);
-	// }
-	// printf("\n");
-
 	if(is_transformed){
 		glm::vec4 temp_dir = glm::vec4(ray_dir, 0.0f);
-		glm::vec4 temp_pos = glm::vec4(ray_pos, 0.0f);
+		glm::vec4 temp_pos = glm::vec4(ray_pos, 1.0f);
 
 		temp_dir = inv_trans * temp_dir;
 		temp_pos = inv_trans * temp_pos;
 
-		ray_dir = glm::normalize(temp_dir.xyz());
+		ray_dir = temp_dir.xyz();
 		ray_pos = temp_pos.xyz();
 	}
 	
-	// for (i=0; i<3; i++){
-	// 	printf("%f ",ray_dir[i]);
-	// }
-	// printf("\n");
-	// for (i=0; i<3; i++){
-	// 	printf("***%f ",cam_ray->getDirection()[i]);
-	// }
-	// printf("\n");
-
-	// glm::vec3 ray_dir = cam_ray->getDirection();
-	// glm::vec3 ray_pos = cam_ray->getPosition();
-
 	float descriminant = sqrt(pow(glm::dot(ray_dir, (ray_pos - position)), 2) - glm::dot(ray_dir, ray_dir) * (glm::dot(ray_pos - position, ray_pos - position) - pow(radius, 2)));
 
 	if(descriminant < 0 ){

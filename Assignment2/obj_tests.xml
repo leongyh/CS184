@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<root>
+	<test id="1">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 3.0</pos>
+				<ll>-2.0 -2.0 2.0</ll>
+				<lr>2.0 -2.0 2.0</lr>
+				<ul>-2.0 2.0 2.0</ul>
+				<ur>2.0 2.0 2.0</ur>
+			</cam>
+			<image>
+				<width>300</width>
+				<height>300</height>
+				<out>/home/h/obj1.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.1 0.1 0.1</col>
+				</al>
+				<pl>
+					<pos>200.0 200.0 200.0</pos>
+					<col>0.6 0.6 0.6</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<obj>
+				<file>/home/h/CS184/Assignment2/teapot.obj</file>
+				<type>0</type>
+				<ka>0.3 0.15 0</ka>
+				<kd>0.8 0.4 0</kd>
+				<ks>0.8 0.4 0</ks>
+				<sp>16</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</obj>
+		</geom>
+	</test>
+</root>

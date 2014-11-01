@@ -205,7 +205,7 @@
 			<cam>
 				<pos>0.0 0.0 0.0</pos>
 				<view>0.0 0.0 -1.0</view>
-				<up>-1.0, 0.0, 0.0</up>
+				<up>0.0 -1.0, 0.0</up>
 				<depth>3.0</depth>
 			</cam>
 			<image>
@@ -227,7 +227,7 @@
 		<geom>
 			<sphere>
 				<pos>0.0 0.0 -17.0</pos>
-				<rad>2.0</rad>
+				<rad>1.0</rad>
 				<ka>0.1 0.1 0.1</ka>
 				<kd>1.0 0.0 0.0</kd>
 				<ks>1.0 1.0 1.0</ks>
@@ -240,7 +240,7 @@
 			</sphere>
 			<sphere>
 				<pos>-2.0 4.0 -17.0</pos>
-				<rad>1.5</rad>
+				<rad>1.0</rad>
 				<ka>0.1 0.1 0.1</ka>
 				<kd>0.0 1.0 0.0</kd>
 				<ks>1.0 1.0 1.0</ks>
@@ -253,7 +253,7 @@
 			</sphere>
 			<sphere>
 				<pos>-2.0 -4.0 -17.0</pos>
-				<rad>1.5</rad>
+				<rad>1.0</rad>
 				<ka>0.1 0.1 0.1</ka>
 				<kd>0.0 0.0 1.0</kd>
 				<ks>1.0 1.0 1.0</ks>
@@ -266,7 +266,7 @@
 			</sphere>
 			<sphere>
 				<pos>2.0 4.0 -17.0</pos>
-				<rad>1.5</rad>
+				<rad>1.0</rad>
 				<ka>0.1 0.1 0.1</ka>
 				<kd>1.0 1.0 0.0</kd>
 				<ks>1.0 1.0 1.0</ks>
@@ -279,7 +279,7 @@
 			</sphere>
 			<sphere>
 				<pos>2.0 -4.0 -17.0</pos>
-				<rad>1.5</rad>
+				<rad>1.0</rad>
 				<ka>0.1 0.1 0.1</ka>
 				<kd>0.0 1.0 1.0</kd>
 				<ks>1.0 1.0 1.0</ks>
@@ -287,7 +287,7 @@
 				<kr>0.9 0.9 0.9</kr>
 				<trans>
 					<scale>0.5 1.5 1.0</scale>
-					<rot>0.0 -45.0 135.0</rot>
+					<rot>0.0 45.0 135.0</rot>
 				</trans>	
 			</sphere>
 		</geom>
@@ -304,7 +304,7 @@
 			<image>
 				<width>500</width>
 				<height>500</height>
-				<out>/home/h/test_simple_transform.png</out>
+				<out>/home/h/test_simple_no_transform.png</out>
 			</image>
 			<lights>
 				<dl>
@@ -324,7 +324,44 @@
 				<kr>0.9 0.9 0.9</kr>
 				<trans>
 					<!-- <scale>4.0 2.0 2.0</scale> -->
-					<rot>0.0 0.0 40.0</rot>
+					<!-- <rot>0.0 0.0 40.0</rot> -->
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+	<test id="6">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<view>0.0 0.0 -1.0</view>
+				<up>-1.0 0.0 0.0</up>
+				<depth>3.0</depth>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_simple_transform.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 0.0</pos>
+				<rad>2.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>4.0 2.0 2.0</scale>
+					<rot>5.0 5.0 0.0</rot>
+					<tlt>0.0 0.0 -17.0</tlt>
 				</trans>
 			</sphere>
 		</geom>

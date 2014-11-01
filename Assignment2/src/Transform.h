@@ -6,6 +6,8 @@
 // #include <stack>
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
+#include <glm/gtx/matrix_cross_product.hpp>
+#include <glm/gtx/euler_angles.hpp>
 #include "Ray.h"
 
 class Transform{
@@ -22,7 +24,6 @@ class Transform{
 		void pushScale(float x, float y, float z);
 		void pushRotate(float x, float y, float z);
 
-		// void popMatrix();
 		void resetTransform();
 
 		glm::mat4 getTransform();

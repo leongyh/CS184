@@ -1,0 +1,547 @@
+<?xml version="1.0"?>
+<root>
+	<test id="0">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>400</width>
+				<height>400</height>
+				<out>/home/h/test_basic1.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>-0.5 -0.3 -0.9</dir>
+					<col>0.8 0.8 0.8</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -7.0</pos>
+				<rad>2.0</rad>
+				<ka>0.0 0.0 0.2</ka>
+				<kd>0.0 0.0 0.7</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>20</sp>
+				<kr>0.5 0.6 0.7</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="1">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_basic2.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>-0.5 -0.3 -0.9</dir>
+					<col>0.8 0.8 0.8</col>
+				</dl>
+				<pl>
+					<pos>200 200 200</pos>
+					<center>0.0 0.0 0.0</center>
+					<scale>1.0</scale>
+					<col>0.8 0.8 0.8</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -6.5</pos>
+				<rad>2.0</rad>
+				<ka>0.0 0.0 0.2</ka>
+				<kd>0.0 0.0 0.7</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>20</sp>
+				<kr>0.5 0.6 0.7</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="2">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_shadows.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>1.0 1.0 -1.0</dir>
+					<col>0.0 0.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -20.0</pos>
+				<rad>3.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+			<sphere>
+				<pos>-2.0 2.0 -15.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+			<sphere>
+				<pos>-2.0 -2.0 -15.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+			<triangle>
+				<v1>5.0 5.0 -17.0</v1>
+				<v2>1.0 4.0 -20.0</v2>
+				<v3>6.0 -1.0 -20.0</v3>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.1 0.1 0.1</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>1.0 1.0 1.0</kr>
+			</triangle>
+		</geom>
+	</test>
+
+	<test id="3">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_reflections.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>-1.0 1.0 1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -17.0</pos>
+				<rad>2.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>0.0 4.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>0.0 -4.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 0.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>4.0 0.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+			<sphere>
+				<pos>-4.0 0.0 -17.0</pos>
+				<rad>1.5</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="4">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test_transform.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>-1.0 1.0 1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -17.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>4.0 2.0 2.0</scale>
+					<rot>0.0 0.0 0.0</rot>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>-2.0 4.0 -17.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>0.5 1.5 1.0</scale>
+					<rot>0.0 -45.0 -45.0</rot>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>-2.0 -4.0 -17.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 0.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>0.5 1.5 1.0</scale>
+					<rot>0.0 -45.0 45.0</rot>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>2.0 4.0 -17.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 1.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>0.5 1.5 1.0</scale>
+					<rot>0.0 45.0 -135.0</rot>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>2.0 -4.0 -17.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.0 1.0 1.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>0.5 1.5 1.0</scale>
+					<rot>0.0 45.0 135.0</rot>
+				</trans>	
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="5">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_simple_no_transform.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -17.0</pos>
+				<rad>2.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<!-- <scale>4.0 2.0 2.0</scale> -->
+					<!-- <rot>0.0 0.0 40.0</rot> -->
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="6">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_simple_transform_not_centered.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -17.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>4.0 2.0 2.0</scale>
+					<rot>0.0 45.0 135.0</rot>
+					<!-- <tlt>0.0 0.0 -17.0</tlt> -->
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="7">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_simple_transform_centered.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 0.0</pos>
+				<rad>1.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>1.0 0.0 0.0</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>0.9 0.9 0.9</kr>
+				<trans>
+					<scale>4.0 2.0 2.0</scale>
+					<rot>0.0 45.0 135.0</rot>
+					<tlt>0.0 0.0 -17.0</tlt>
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="8">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_triangle.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>1.0 1.0 -1.0</dir>
+					<col>0.0 0.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<triangle>
+				<v1>5.0 5.0 -17.0</v1>
+				<v2>1.0 4.0 -20.0</v2>
+				<v3>6.0 -1.0 -20.0</v3>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.9 0.1 0.1</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>1.0 1.0 1.0</kr>
+			</triangle>
+		</geom>
+	</test>
+
+	<test id="10">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_triangle.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>1.0 1.0 -1.0</dir>
+					<col>0.0 0.0 1.0</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<triangle>
+				<v1>5.0 5.0 -17.0</v1>
+				<v2>1.0 4.0 -20.0</v2>
+				<v3>6.0 -1.0 -20.0</v3>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.9 0.1 0.1</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>1.0 1.0 1.0</kr>
+			</triangle>
+		</geom>
+	</test>	
+
+	<test id="11">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 0.0</pos>
+				<ll>-1.0 -1.0 -3.0</ll>
+				<lr>1.0 -1.0 -3.0</lr>
+				<ul>-1.0 1.0 -3.0</ul>
+				<ur>1.0 1.0 -3.0</ur>
+			</cam>
+			<image>
+				<width>500</width>
+				<height>500</height>
+				<out>/home/h/test_pl.png</out>
+			</image>
+			<lights>
+				<dl>
+					<dir>1.0 -1.0 -1.0</dir>
+					<col>1.0 1.0 1.0</col>
+				</dl>
+				<dl>
+					<dir>1.0 1.0 -1.0</dir>
+					<col>0.0 0.0 1.0</col>
+				</dl>
+				<pl>
+					<pos>200.0 200.0 200.0</pos>
+					<col>0.6 0.6 0.6</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<triangle>
+				<v1>5.0 5.0 -17.0</v1>
+				<v2>1.0 4.0 -20.0</v2>
+				<v3>6.0 -1.0 -20.0</v3>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.9 0.1 0.1</kd>
+				<ks>1.0 1.0 1.0</ks>
+				<sp>50</sp>
+				<kr>1.0 1.0 1.0</kr>
+			</triangle>
+		</geom>
+	</test>	
+</root>

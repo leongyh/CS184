@@ -1,0 +1,687 @@
+<?xml version="1.0"?>
+<root>
+	<test id="1">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test1.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.1 0.1 0.1</col>
+				</al>
+				<pl>
+					<pos>200.0 200.0 200.0</pos>
+					<col>0.6 0.6 0.6</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -50.0</pos>
+				<rad>45.0</rad>
+				<ka>0.1 0.1 0.0</ka>
+				<kd>1.0 1.0 0.0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="2">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test2.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.1 0.1 0.1</col>
+				</al>
+				<pl>
+					<pos>-50.0 -50.0 50.0</pos>
+					<col>1.0 0.0 1.0</col>
+				</pl>
+				<pl>
+					<pos>150.0 150.0 -75.0</pos>
+					<col>1.0 1.0 1.0</col>
+				</pl>
+				<pl>
+					<pos>30.0 -40.0 80.0</pos>
+					<col>1.0 1.0 0.0</col>
+				</pl>
+				<pl>
+					<pos>10.0 20.0 30.0</pos>
+					<col>0.0 1.0 1.0</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -50.0</pos>
+				<rad>45.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.1 0.1 0.1</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>5</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="3">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test3.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.1 0.1 0.1</col>
+				</al>
+				<dl>
+					<dir>0 0.2 -1</dir>
+					<col>1 1 1</col>
+				</dl>
+				<dl>
+					<dir>1 -1 -1</dir>
+					<col>0.5 0 0</col>
+				</dl>
+				<dl>
+					<dir>-1 -1 -1</dir>
+					<col>0 1 0</col>
+				</dl>
+				<pl>
+					<pos>100 100 300</pos>
+					<col>0 0.1 0</col>
+				</pl>
+				<pl>
+					<pos>-40 -60 -80</pos>
+					<col>0.0 1.0 1.0</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0.0 0.0 -50.0</pos>
+				<rad>45.0</rad>
+				<ka>0 0 0.1</ka>
+				<kd>0 0 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>36</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="4">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test4.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.1 0.1 0.1</col>
+				</al>
+				<pl>
+					<pos>200 0 -50</pos>
+					<col>1 1 1</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>-30.0 0.0 -50.0</pos>
+				<rad>25.0</rad>
+				<ka>0.3 0.15 0</ka>
+				<kd>0.8 0.4 0</kd>
+				<ks>0.8 0.4 0</ks>
+				<sp>30</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+			<sphere>
+				<pos>30.0 0.0 -50.0</pos>
+				<rad>25.0</rad>
+				<ka>0.3 0.15 0</ka>
+				<kd>0.8 0.4 0</kd>
+				<ks>0.8 0.4 0</ks>
+				<sp>30</sp>
+				<kr>0.0 0.0 0.0</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="5">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test5.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.1 0.1 0.1</col>
+				</al>
+				<pl>
+					<pos>200 0 -50</pos>
+					<col>1 1 1</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0 0 0</pos>
+				<rad>1.0</rad>
+				<ka>0.3 0.15 0</ka>
+				<kd>0.8 0.4 0</kd>
+				<ks>0.8 0.4 0</ks>
+				<sp>30</sp>
+				<kr>0.0 0.0 0.0</kr>
+				<trans>
+					<tlt>-30 0 -50</tlt>
+					<scale>25 25 25</scale>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 0 0</pos>
+				<rad>1.0</rad>
+				<ka>0.3 0.15 0</ka>
+				<kd>0.8 0.4 0</kd>
+				<ks>0.8 0.4 0</ks>
+				<sp>30</sp>
+				<kr>0.0 0.0 0.0</kr>
+				<trans>
+					<tlt>30 0 -50</tlt>
+					<scale>25 25 25</scale>
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="6">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test6.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.3 0.3 0.3</col>
+				</al>
+				<pl>
+					<pos>-200 -200 200</pos>
+					<col>0.4 0.4 0.4</col>
+				</pl>
+				<pl>
+					<pos>-100 100 -200</pos>
+					<col>0.3 0.3 0.3</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0 0 -100</pos>
+				<rad>30.0</rad>
+				<ka>0.1 0 0</ka>
+				<kd>1 0 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>10</sp>
+				<kr>0.5 0.5 0.5</kr>
+				<trans>
+					<tlt>-40 0 0</tlt>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 0 -100</pos>
+				<rad>30.0</rad>
+				<ka>0 0.3 0.3</ka>
+				<kd>0 1 1</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>10</sp>
+				<kr>0.0 0.0 0.0</kr>
+				<trans>
+					<tlt>40 0 0</tlt>
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="7">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test7.png</out>
+			</image>
+			<lights>
+				<al>
+					<col>0.3 0.3 0.3</col>
+				</al>
+				<pl>
+					<pos>200 200 200</pos>
+					<col>0.3 0.3 0.3</col>
+				</pl>
+				<pl>
+					<pos>0 100 -150</pos>
+					<col>0.5 0.5 0.5</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>0 0 -100</pos>
+				<rad>30.0</rad>
+				<ka>0.1 0 0</ka>
+				<kd>1 0 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>10</sp>
+				<kr>0.3 0.3 0.3</kr>
+				<trans>
+					<tlt>-30 0 0</tlt>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 0 -100</pos>
+				<rad>30.0</rad>
+				<ka>0 0.3 0.3</ka>
+				<kd>0 1 1</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>10</sp>
+				<kr>0.0 0.0 0.0</kr>
+				<trans>
+					<tlt>30 0 50</tlt>
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="8">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 100.0</pos>
+				<ll>-50.0 -50.0 0.0</ll>
+				<lr>50.0 -50.0 0.0</lr>
+				<ul>-50.0 50.0 0.0</ul>
+				<ur>50.0 50.0 0.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test8.png</out>
+			</image>
+			<lights>
+				<pl>
+					<pos>200 200 200</pos>
+					<col>1 1 1</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<sphere>
+				<pos>-50 -50 -75</pos>
+				<rad>30.0</rad>
+				<ka>0.1 0 0</ka>
+				<kd>1 0 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+			</sphere>
+			<sphere>
+				<pos>-50 -50 -175</pos>
+				<rad>30.0</rad>
+				<ka>0 0.1 0</ka>
+				<kd>0 1 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+			</sphere>
+			<sphere>
+				<pos>50 50 -75</pos>
+				<rad>30.0</rad>
+				<ka>0 0 0.1</ka>
+				<kd>0 0 1</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+			</sphere>
+			<sphere>
+				<pos>-50 50 -175</pos>
+				<rad>30.0</rad>
+				<ka>0.1 0.1 0</ka>
+				<kd>1 1 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+			</sphere>
+			<sphere>
+				<pos>0 0 -125</pos>
+				<rad>30.0</rad>
+				<ka>0 0.1 0.1</ka>
+				<kd>0 1 1</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+			</sphere>
+			<sphere>
+				<pos>50 -50 -75</pos>
+				<rad>30.0</rad>
+				<ka>0.1 0 0.1</ka>
+				<kd>1 0 1</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="9">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 150.0</pos>
+				<ll>-50.0 -50.0 50.0</ll>
+				<lr>50.0 -50.0 50.0</lr>
+				<ul>-50.0 50.0 50.0</ul>
+				<ur>50.0 50.0 50.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test9.png</out>
+			</image>
+			<lights>
+				<pl>
+					<pos>200 200 200</pos>
+					<col>0.7 0.7 0.7</col>
+				</pl>
+				<dl>
+					<dir>0 0 -1</dir>
+					<col>0.4 0.4 0.4</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<triangle>
+				<v1>0 50 0</v1>
+				<v2>-50 -50 0</v2>
+				<v3>50 -50 0</v3>
+				<ka>0 0.1 0.1</ka>
+				<kd>0 0.4 0.4</kd>
+				<ks>0 0.8 0.8</ks>
+				<sp>1000</sp>
+				<kr>0 0 0</kr>
+			</triangle>
+			<sphere>
+				<pos>0 50 0</pos>
+				<rad>10.0</rad>
+				<ka>0.2 0.2 0.2</ka>
+				<kd>0.3 0.3 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>20</sp>
+				<kr>0 0 0</kr>
+			</sphere>
+			<sphere>
+				<pos>-50 -50 0</pos>
+				<rad>10.0</rad>
+				<ka>0.2 0.2 0.2</ka>
+				<kd>0.3 0.3 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>20</sp>
+				<kr>0 0 0</kr>
+			</sphere>
+			<sphere>
+				<pos>50 -50 0</pos>
+				<rad>10.0</rad>
+				<ka>0.2 0.2 0.2</ka>
+				<kd>0.3 0.3 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>20</sp>
+				<kr>0 0 0</kr>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="10">
+		<setup>
+			<cam>
+				<pos>0.0 0.0 150.0</pos>
+				<ll>-50.0 -50.0 50.0</ll>
+				<lr>50.0 -50.0 50.0</lr>
+				<ul>-50.0 50.0 50.0</ul>
+				<ur>50.0 50.0 50.0</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test10.png</out>
+			</image>
+			<lights>
+				<pl>
+					<pos>200 200 200</pos>
+					<col>0.7 0.7 0.7</col>
+				</pl>
+				<dl>
+					<dir>0 0 -1</dir>
+					<col>0.4 0.4 0.4</col>
+				</dl>
+			</lights>
+		</setup>
+		<geom>
+			<triangle>
+				<v1>0 0 0</v1>
+				<v2>2 0 0</v2>
+				<v3>1 2 0</v3>
+				<ka>0 0.1 0.1</ka>
+				<kd>0 0.4 0.4</kd>
+				<ks>0 0.8 0.8</ks>
+				<sp>1000</sp>
+				<kr>0 0 0</kr>
+				<trans>
+					<scale>50 50 50</scale>
+					<tlt>-1 -1 0</tlt>
+				</trans>
+			</triangle>
+			<sphere>
+				<pos>0 0 0</pos>
+				<rad>10.0</rad>
+				<ka>0.2 0.2 0.2</ka>
+				<kd>0.3 0.3 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>20</sp>
+				<kr>0 0 0</kr>
+				<trans>
+					<tlt>0 50 0</tlt>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 0 0</pos>
+				<rad>10.0</rad>
+				<ka>0.2 0.2 0.2</ka>
+				<kd>0.3 0.3 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>20</sp>
+				<kr>0 0 0</kr>
+				<trans>
+					<tlt>0 50 0</tlt>
+					<tlt>-50 -100 0</tlt>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 0 0</pos>
+				<rad>10.0</rad>
+				<ka>0.2 0.2 0.2</ka>
+				<kd>0.3 0.3 0.3</kd>
+				<ks>0.5 0.5 0.5</ks>
+				<sp>20</sp>
+				<kr>0 0 0</kr>
+				<trans>
+					<tlt>0 50 0</tlt>
+					<tlt>-50 -100 0</tlt>
+					<tlt>100 0 0</tlt>
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+
+	<test id="11">
+		<setup>
+			<cam>
+				<pos>0 75 500</pos>
+				<ll>-100 -100 101</ll>
+				<lr>100 -100 101</lr>
+				<ul>-100 100 101</ul>
+				<ur>100 100 101</ur>
+			</cam>
+			<image>
+				<width>1000</width>
+				<height>1000</height>
+				<out>/home/h/test11.png</out>
+			</image>
+			<lights>
+				<pl>
+					<pos>200 200 200</pos>
+					<col>0.4 0.4 0.4</col>
+				</pl>
+				<pl>
+					<pos>-200 200 200</pos>
+					<col>0.4 0.4 0.4</col>
+				</pl>
+			</lights>
+		</setup>
+		<geom>
+			<triangle>
+				<v1>0 0 0</v1>
+				<v2>100 0 100</v2>
+				<v3>0 200 0</v3>
+				<ka>0.1 0 0</ka>
+				<kd>1 0 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+				<trans>
+					<tlt>0 -95 0</tlt>
+				</trans>
+			</triangle>
+			<triangle>
+				<v1>0 0 0</v1>
+				<v2>0 200 0</v2>
+				<v3>-100 0 100</v3>
+				<ka>0 0.1 0</ka>
+				<kd>0 1 0</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+				<trans>
+					<tlt>0 -95 0</tlt>
+				</trans>
+			</triangle>
+			<triangle>
+				<v1>0 0 0</v1>
+				<v2>-100 0 100</v2>
+				<v3>100 0 100</v3>
+				<ka>0 0 0.1</ka>
+				<kd>0 0 1</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>16</sp>
+				<kr>0.7 0.7 0.7</kr>
+				<trans>
+					<tlt>0 -95 0</tlt>
+				</trans>
+			</triangle>
+			<sphere>
+				<pos>0 50 50</pos>
+				<rad>15.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.9 0.9 0.9</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>5</sp>
+				<kr>1 1 1</kr>
+				<trans>
+					<tlt>0 -95 0</tlt>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 50 50</pos>
+				<rad>15.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.9 0.9 0.9</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>5</sp>
+				<kr>1 1 1</kr>
+				<trans>
+					<tlt>0 -95 0</tlt>
+					<tlt>0 35 0</tlt>
+				</trans>
+			</sphere>
+			<sphere>
+				<pos>0 50 50</pos>
+				<rad>15.0</rad>
+				<ka>0.1 0.1 0.1</ka>
+				<kd>0.9 0.9 0.9</kd>
+				<ks>0.8 0.8 0.8</ks>
+				<sp>5</sp>
+				<kr>1 1 1</kr>
+				<trans>
+					<tlt>0 -95 0</tlt>
+					<tlt>0 35 0</tlt>
+					<tlt>0 35 0</tlt>
+				</trans>
+			</sphere>
+		</geom>
+	</test>
+</root>
