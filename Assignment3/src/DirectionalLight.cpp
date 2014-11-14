@@ -1,5 +1,5 @@
 #include "DirectionalLight.h"
-#include <stdio>
+#include <cstdio>
 
 DirectionalLight::DirectionalLight(float x, float y, float z, float r, float g, float b){
 	direction = glm::vec3(x, y, z);

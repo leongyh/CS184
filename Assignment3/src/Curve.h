@@ -17,7 +17,7 @@ class Curve{
 		
 		bool insertPoint(ControlPoint& p);
 		
-		std::vector getPoints();
+		std::vector<ControlPoint*> getPoints();
 		
 		void print();
 };

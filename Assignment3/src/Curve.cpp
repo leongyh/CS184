@@ -1,14 +1,14 @@
 #include "Curve.h"
-#include <stdio>
+#include <cstdio>
 
 Curve::Curve(int d){
-	this.degree = d;
-	this.points.reserve(d+1);
+	this->degree = d;
+	this->points.reserve(d+1);
 }
 
 Curve::Curve(const Curve& obj){
-	this.degree = obj.degree;
-	this.points = obj.points;
+	this->degree = obj.degree;
+	this->points = obj.points;
 }
 
 Curve::~Curve(){
@@ -16,8 +16,8 @@ Curve::~Curve(){
 }
 		
 bool Curve::insertPoint(ControlPoint& p){
-	if(points.length() < this.degree+1){
-		this.points.push_back(p);
+	if(this->points.size() < this->degree + 1){
+		this->points.push_back(&p);
 
 		return true;
 	}else{
@@ -25,10 +25,12 @@ bool Curve::insertPoint(ControlPoint& p){
 	}
 }
 		
-std::vector Curve::getPoints(){
-	return this.points;
+std::vector<ControlPoint*> Curve::getPoints(){
+	return this->points;
 }
 
 void Curve::print(){
-
+	for(int i = 0; i < this->points.size(); i++){
+		this->points[i]->print();
+	}
 }

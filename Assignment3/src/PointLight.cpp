@@ -1,5 +1,5 @@
 #include "PointLight.h"
-#include <stdio>
+#include <cstdio>
 #include <cmath>
 
 PointLight::PointLight(float x, float y, float z, float r, float g, float b){

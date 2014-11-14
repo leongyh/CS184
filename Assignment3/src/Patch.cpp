@@ -1,12 +1,12 @@
 #include "Patch.h"
-#include <stdio>
+#include <cstdio>
 
 Patch::Patch(){
-	this.curves.reserve(4);
+	this->curves.reserve(4);
 }
 
 Patch::Patch(const Patch& obj){
-	this.curves = obj.curves;
+	this->curves = obj.curves;
 }
 
 Patch::~Patch(){
@@ -14,8 +14,8 @@ Patch::~Patch(){
 }
 		
 bool Patch::insertCurve(Curve& c){
-	if(points.length() < 4){
-		this.curves.push_back(c);
+	if(this->curves.size() < 4){
+		this->curves.push_back(&c);
 
 		return true;
 	}else{
@@ -23,10 +23,13 @@ bool Patch::insertCurve(Curve& c){
 	}
 }
 		
-std::vector Patch::getDemCurves(){
-	return this.curves;
+std::vector<Curve*> Patch::getDemCurves(){
+	return this->curves;
 }
 
 void Patch::print(){
-
+	for(int i = 0; i < this->curves.size(); i++){
+		printf("Curve #%d:\n", i);
+		this->curves[i]->print();
+	}
 }

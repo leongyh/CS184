@@ -16,7 +16,7 @@ class Patch{
 		
 		bool insertCurve(Curve& c);
 		
-		std::vector getDemCurves();
+		std::vector<Curve*> getDemCurves();
 		
 		void print();
 };

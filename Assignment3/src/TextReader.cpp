@@ -1,7 +1,7 @@
 #include "TextReader.h"
-#include <stdio>
+#include <cstdio>
 #include <vector>
-#include <string>
+#include <cstring>
 #include <fstream>
 #include <sstream>
 
@@ -24,31 +24,35 @@ void TextReader::parse(Scene& scene, const char* file_loc){
 
 	std::stringstream fl(line);
 	int num_patches;
-	fl >> num_patch;
+	fl >> num_patches;
+
+	Patch* patch = new Patch();
+	int count = 0;
 
 	while(std::getline(file, line)){
-		std::stringstream l(line);
-		
-		if(l.length() > 0){
-			Patch* patch = new Patch();
+		if(line.length() > 1){
+			std::stringstream l(line);
+			// printf("%s\n", line.c_str());
+			Curve* curve = new Curve(3);
 
-			for(int i = 0; i < 4; i++){
-				Curve* curve = new Curve(3);
+			for(int j = 0; j < 4; j++){
+				float x, y, z;
 
-				for(int j = 0; j < 4; i++){
-					float x, y, z;
+				l >> x, l >> y, l >> z;
 
-					l >> x, l >> y, l >> z;
+				ControlPoint* p = new ControlPoint(x, y, z);
+				curve->insertPoint(*p);
+			}
 
-					ControlPoint* p = new ControlPoint(x, y, z);
-					curve->insertPoint(p);
-				}
+			patch->insertCurve(*curve);
 
-				patch->insertCurve(curve);
+			count++;
+
+			if(count % 4 == 0){
+				scene.insertPatch(*patch);
+				patch = new Patch();
 			}
 		}
-
-		scene->insertPatch(patch);
 	}
 	
 	file.close();

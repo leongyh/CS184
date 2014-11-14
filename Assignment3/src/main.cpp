@@ -267,69 +267,15 @@ void setPixel(int x, int y, GLfloat r, GLfloat g, GLfloat b) {
 //   return glm::normalize(glm::vec3(1/10 * cos(x/10) * cos(z/20), 0.0f, -1.0f/20 * sin(x/10) * sin(z/20)));
 // }
 
-// void drawWave(){
-//   glBegin(GL_POINTS);
+void initGL() {
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
 
-//   for(float x = 2.0f * viewport.w / 10.0f; x < 8.0f * viewport.w / 10.0f; x+=0.1f){
-//     for(float z = 3.0f * viewport.w / 10.0f; z < 7.0f * viewport.w / 10.0f; z+=0.1f){
-//       //coordinates of surface.
-//       float y = (viewport.h * 0.3) * sin(x/10) * cos(z/20) + viewport.h / 2.0f;
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 
-//       //normal of surface
-//       glm::vec3 normal = getWaveNormal(x, y, z);
-
-//       //color components
-//       float r = 0.0f;
-//       float g = 0.0f;
-//       float b = 0.0f;
-
-//       for(int d = 0; d < num_dl; d++){
-//         glm::vec3 rgbDiffusion = calculateDiffusion(normal, (dir_lights[d]).getReverseDirection(), (dir_lights[d]).getColor());
-
-//         glm::vec3 rgbSpecular = glm::vec3(0.0f, 0.0f, 0.0f);
-
-//         if(specular_method == 1){
-//           rgbSpecular = calculateSpecular(normal, (dir_lights[d]).getReverseDirection(), (dir_lights[d]).getColor());
-//         } else if(specular_method == 2){
-//           rgbSpecular = calculateWardSpecular(normal, (dir_lights[d]).getReverseDirection(), (dir_lights[d]).getColor());
-//         }
-
-//         glm::vec3 rgbAmbient = calculateAmbient((dir_lights[d]).getColor());
-
-//         r += rgbDiffusion.x + rgbSpecular.x + rgbAmbient.x;
-//         g += rgbDiffusion.y + rgbSpecular.y + rgbAmbient.y;
-//         b += rgbDiffusion.z + rgbSpecular.z + rgbAmbient.z;
-//       }
-
-//       for (int p = 0; p < num_pl; p++)
-//       {
-//         glm::vec3 rgbDiffusion = calculateDiffusion(normal, (point_lights[p]).getLightVec(x, y, z), (point_lights[p]).getColor());
-
-//         glm::vec3 rgbSpecular = glm::vec3(0.0f, 0.0f, 0.0f);
-
-//         if(specular_method == 1){
-//           rgbSpecular = calculateSpecular(normal, (point_lights[p]).getLightVec(x, y, z), (point_lights[p]).getColor());
-//         } else if(specular_method == 2){
-//           rgbSpecular = calculateWardSpecular(normal, (point_lights[p]).getLightVec(x, y, z), (point_lights[p]).getColor());
-//         }
-
-//         glm::vec3 rgbAmbient = calculateAmbient((point_lights[p]).getColor());
-
-//         r += rgbDiffusion.x + rgbSpecular.x + rgbAmbient.x;
-//         g += rgbDiffusion.y + rgbSpecular.y + rgbAmbient.y;
-//         b += rgbDiffusion.z + rgbSpecular.z + rgbAmbient.z;
-//       }
-
-//       r = min(1.0f, r);
-//       g = min(1.0f, g);
-//       b = min(1.0f, b);
-
-//       // printf("%.3f\n", r);
-
-//       setPixel(x, y, r, g, b);
-//     }
-//   }
-// }
+  glOrtho(-100.0f, 100.0f, -100.0f, 100.0f, -100.0f, 100.0f);
+}
 
 //****************************************************
 // function that does the actual drawing of stuff
@@ -337,20 +283,39 @@ void setPixel(int x, int y, GLfloat r, GLfloat g, GLfloat b) {
 void myDisplay() {
   glClear(GL_COLOR_BUFFER_BIT);				// clear the color buffer
 
-  glMatrixMode(GL_MODELVIEW);			        // indicate we are specifying camera transformations
-  glLoadIdentity();				        // make sure transformation is "zero'd"
+  // glBegin(GL_LINES);
+  // glColor3f(1.0, 1.0, 0.0);
+  // glVertex3f(10.0f, 110.0f, -50.0f);
+  // glVertex3f(110.0f, 110.0f, -50.0f);
+  // glEnd();
 
+  glBegin(GL_LINES);
+  glColor3f(1.0, 1.0, 0.0); // yellow 
+  glVertex2f(0.0, 90.0);
+  glVertex2f(90.0, 90.0);
+  // glVertex2f(250.0, 300.0);
+  // glVertex2f(450.0, 300.0);
+  glEnd();
 
-  // Start drawing
-  // if(is_wave){
-  //   drawWave();
-  // }else if(!is_multi){
-  //   drawSphere(centerX, centerY, centerZ, unit_radius);  
-  // } else{
-  //   drawMultiSphere();
-  // }
+  // float x, y, z, angle;
+
+  // // Call only once for all remaining points
+  // glBegin(GL_POINTS);
+  // glColor3f(0.0f, 1.0f, 0.0f);
+  // z = -50.0f;
+  // for(angle = 0.0f; angle <= (2.0f*PI)*3.0f; angle += 0.1f)
+  //   {
+  //   x = 50.0f*sin(angle);
+  //   y = 50.0f*cos(angle);
+
+  //   // Specify the point and move the Z value up a little
+  //   glVertex3f(x, y, z);
+  //   z += 0.5f;
+  //   }
+
+  // // Done drawing points
+  // glEnd();
   
-
   glFlush();
   glutSwapBuffers();					// swap buffers (we earlier set double buffer)
 }
@@ -374,13 +339,15 @@ void keyPress(unsigned char key, int x, int y){
 //****************************************************
 int main(int argc, char *argv[]) {
   // Initalize theviewport size
-  viewport.w = 200;
-  viewport.h = 200;
+  viewport.w = 500;
+  viewport.h = 500;
 
-  Scene* scene = new Scene();
-  TextReader* reader = new TextReader();
+  // Scene* scene = new Scene(atof(argv[2]));
+  // TextReader* reader = new TextReader();
 
-  reader->parse(scene, argv[1]);
+  // reader->parse(*scene, argv[1]);
+
+  // scene->print();
 
   //This initializes glut
   glutInit(&argc, argv);
@@ -400,6 +367,8 @@ int main(int argc, char *argv[]) {
 
   glutKeyboardFunc(keyPress);     // quit on space button
 
+  initGL();
+  
   glutMainLoop();							// infinite loop that will keep drawing and resizing
   // and whatever else
 

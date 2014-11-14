@@ -8,6 +8,7 @@ class ControlPoint{
 	
 	public:
 		ControlPoint(float x, float y, float z);
+		ControlPoint(glm::vec3 pos);
 		ControlPoint(const ControlPoint& obj);
 		virtual ~ControlPoint(); 
 		
