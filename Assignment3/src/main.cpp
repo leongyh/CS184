@@ -99,8 +99,8 @@ void myReshape(int w, int h) {
   glViewport (0,0,viewport.w,viewport.h);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluOrtho2D(0, viewport.w, 0, viewport.h);
-
+  // gluOrtho2D(0, viewport.w, 0, viewport.h);
+  glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
 }
 
 
@@ -254,68 +254,23 @@ void setPixel(int x, int y, GLfloat r, GLfloat g, GLfloat b) {
 //   }
 // }
 
-// void drawMultiSphere(){
-//   drawSphere(1.0f * viewport.w / 5.0f, 2.0f * viewport.h / 5.0f, min(viewport.w, viewport.h) / 2.0f, unit_radius / 2.0f);
-//   drawSphere(4.0f * viewport.w / 5.0f, 3.0f * viewport.h / 5.0f, min(viewport.w, viewport.h) / 2.0f, unit_radius / 4.0f);
-//   drawSphere(1.5f * viewport.w / 5.0f, 3.5f * viewport.h / 5.0f, min(viewport.w, viewport.h) / 2.0f, unit_radius / 2.5f);
-//   drawSphere(4.0f * viewport.w / 5.0f, 4.0f * viewport.h / 5.0f, min(viewport.w, viewport.h) / 2.0f, unit_radius / 3.3f);
-//   drawSphere(4.0f * viewport.w / 5.0f, 1.0f * viewport.h / 5.0f, min(viewport.w, viewport.h) / 2.0f, unit_radius / 1.75f);
-// }
-
-// glm::vec3 getWaveNormal(float x, float y, float z){
-//   //gradient method
-//   return glm::normalize(glm::vec3(1/10 * cos(x/10) * cos(z/20), 0.0f, -1.0f/20 * sin(x/10) * sin(z/20)));
-// }
-
 void initGL() {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
+  glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-
-  glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
 }
 
 //****************************************************
 // function that does the actual drawing of stuff
 //***************************************************
 void myDisplay() {
-  glClear(GL_COLOR_BUFFER_BIT);				// clear the color buffer
-
-  // glBegin(GL_LINES);
-  // glColor3f(1.0, 1.0, 0.0);
-  // glVertex3f(-2.0f, 0.0f, 0.0f);
-  // glVertex3f(2.0f, 0.0f, 0.0f);
-  // glEnd();
-
-  glBegin(GL_LINES);
-  glColor3f(1.0, 1.0, 0.0); // yellow 
-  glVertex2f(-2.0, 0.0);
-  glVertex2f(2.0, 0.0);
-  // glVertex2f(250.0, 300.0);
-  // glVertex2f(450.0, 300.0);
-  glEnd();
-
-  // float x, y, z, angle;
-
-  // // Call only once for all remaining points
-  // glBegin(GL_POINTS);
-  // glColor3f(0.0f, 1.0f, 0.0f);
-  // z = -50.0f;
-  // for(angle = 0.0f; angle <= (2.0f*PI)*3.0f; angle += 0.1f)
-  //   {
-  //   x = 50.0f*sin(angle);
-  //   y = 50.0f*cos(angle);
-
-  //   // Specify the point and move the Z value up a little
-  //   glVertex3f(x, y, z);
-  //   z += 0.5f;
-  //   }
-
-  // // Done drawing points
-  // glEnd();
+  glClear(GL_COLOR_BUFFER_BIT);
   
+    
   glFlush();
   glutSwapBuffers();					// swap buffers (we earlier set double buffer)
 }
@@ -361,13 +316,12 @@ int main(int argc, char *argv[]) {
   glutCreateWindow(argv[0]);
 
   initScene();							// quick function to set up scene
+  initGL();
 
   glutDisplayFunc(myDisplay);				// function to run when its time to draw something
   glutReshapeFunc(myReshape);				// function to run when the window gets resized
 
   glutKeyboardFunc(keyPress);     // quit on space button
-
-  initGL();
   
   glutMainLoop();							// infinite loop that will keep drawing and resizing
   // and whatever else
