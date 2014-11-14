@@ -274,7 +274,7 @@ void initGL() {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
-  glOrtho(-100.0f, 100.0f, -100.0f, 100.0f, -100.0f, 100.0f);
+  glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
 }
 
 //****************************************************
@@ -285,14 +285,14 @@ void myDisplay() {
 
   // glBegin(GL_LINES);
   // glColor3f(1.0, 1.0, 0.0);
-  // glVertex3f(10.0f, 110.0f, -50.0f);
-  // glVertex3f(110.0f, 110.0f, -50.0f);
+  // glVertex3f(-2.0f, 0.0f, 0.0f);
+  // glVertex3f(2.0f, 0.0f, 0.0f);
   // glEnd();
 
   glBegin(GL_LINES);
   glColor3f(1.0, 1.0, 0.0); // yellow 
-  glVertex2f(0.0, 90.0);
-  glVertex2f(90.0, 90.0);
+  glVertex2f(-2.0, 0.0);
+  glVertex2f(2.0, 0.0);
   // glVertex2f(250.0, 300.0);
   // glVertex2f(450.0, 300.0);
   glEnd();
