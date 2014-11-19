@@ -60,44 +60,24 @@ float phi = 90.0f, theta = 0.0f;
 float eyeX = 0.0f, eyeY = -5.0f, eyeZ = 0.0f;
 float transX = 0.0f, transY = 0.0f, transZ = 0.0f;
 
-float angle = 0.0f;
-float lx = 0.0f, lz = -1.0f;
-float x = 0.0f, z = 5.0f;
+float angle_z = 0.0f, angle_x = 0.0f;
+float tx = 0.0f, tz = 0.0f;
+float scale = 1.0f;
 
-void initGL() {
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
+void initLights() {
+   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+   GLfloat mat_shininess[] = { 50.0 };
+   GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+   glClearColor (0.0, 0.0, 0.0, 0.0);
+   glShadeModel (GL_SMOOTH);
 
-  glOrtho(-5.0f, 5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
+   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-}
-
-void drawSnowMan() {
-
-  glColor3f(1.0f, 1.0f, 1.0f);
-
-// Draw Body
-  glTranslatef(0.0f ,0.75f, 0.0f);
-  glutSolidSphere(0.75f,20,20);
-
-// Draw Head
-  glTranslatef(0.0f, 1.0f, 0.0f);
-  glutSolidSphere(0.25f,20,20);
-
-// Draw Eyes
-  glPushMatrix();
-  glColor3f(0.0f,0.0f,0.0f);
-  glTranslatef(0.05f, 0.10f, 0.18f);
-  glutSolidSphere(0.05f,10,10);
-  glTranslatef(-0.1f, 0.0f, 0.0f);
-  glutSolidSphere(0.05f,10,10);
-  glPopMatrix();
-
-// Draw Nose
-  glColor3f(1.0f, 0.5f , 0.5f);
-  glutSolidCone(0.08f,0.5f,10,2);
+   glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
+   glEnable(GL_DEPTH_TEST);
 }
 
 void renderScene(void) {
@@ -112,13 +92,19 @@ void renderScene(void) {
   // scene->render(WIREFRAME, FLATSHADING);
   glLoadIdentity();
 
-  gluLookAt(  x, 1.0f, z,
-      x+lx, 1.0f,  z+lz,
-      0.0f, 1.0f,  0.0f);
+  gluLookAt(0.0f, -9.0f, 5.0f,
+      0.0, 0.0f, 0.0f,
+      0.0f, 0.0f, 1.0f);
 
-  scene->render(WIREFRAME, FLATSHADING);
+  glScalef(scale, scale, scale);
+  glTranslatef(tx, 0.0f, tz);
+  glRotatef(angle_z, 0.0f, 0.0f, 1.0f);
+  glRotatef(angle_x, 1.0f, 0.0f, 0.0f);
+  
+  scene->draw(WIREFRAME, FLATSHADING);
 
   glutSwapBuffers();
+  glFlush();
 }
 
 void myReshape(int w, int h) {
@@ -175,42 +161,38 @@ void keyPress(unsigned char key, int x, int y){
 }
 
 void specialKeyPress(int key, int xx, int yy) {
-  float fraction = 0.1f;
+  const float rot_sen = 1.0f;
+  const float trans_sen = 0.1f;
+
   int mod = glutGetModifiers();
 
   switch(key){
     case GLUT_KEY_LEFT:
       if(mod == GLUT_ACTIVE_SHIFT){
-
+        tx -= trans_sen;
       } else{
-        angle -= 0.01f;
-        lx = sin(angle);
-        lz = -cos(angle);
+        angle_z -= rot_sen;
       }
       break;
     case GLUT_KEY_RIGHT:
       if(mod == GLUT_ACTIVE_SHIFT){
-
+        tx += trans_sen;
       } else{
-        angle += 0.01f;
-        lx = sin(angle);
-        lz = -cos(angle);
+        angle_z += rot_sen;
       }
       break;
     case GLUT_KEY_UP:
       if(mod == GLUT_ACTIVE_SHIFT){
-
+        tz += trans_sen;
       } else{
-        x += lx * fraction;
-        z += lz * fraction;
+        angle_x -= rot_sen;
       }
       break;
     case GLUT_KEY_DOWN:
       if(mod == GLUT_ACTIVE_SHIFT){
-
+        tz -= trans_sen;
       } else{
-        x -= lx * fraction;
-        z -= lz * fraction;
+        angle_x += rot_sen;
       }
       break;
     default:
@@ -230,6 +212,7 @@ int main(int argc, char *argv[]) {
   TextReader* reader = new TextReader();
 
   reader->parse(*scene, argv[1]);
+  scene->render();
   // scene->print();
 
   glutInit(&argc, argv);
@@ -238,7 +221,7 @@ int main(int argc, char *argv[]) {
   glutInitWindowPosition(0,0);
   glutCreateWindow(argv[0]);
 
-  // initGL();
+  initLights();
 
   glutDisplayFunc(renderScene);
   glutReshapeFunc(myReshape);

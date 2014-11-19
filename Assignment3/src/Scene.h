@@ -31,22 +31,20 @@ class Scene{
 	int type;
 	float step;
 
-	std::vector<DirectionalLight*> dir_lights;
-	std::vector<PointLight*> pnt_lights;
 	std::vector<Patch*> patches;
+	std::vector<ControlPoint*> generated_pts;
+	std::vector<glm::vec3> generated_normals;
 
 	public:
 		Scene(int type, float u);
 		virtual ~Scene();
-		void insertDirectionalLight(DirectionalLight& dl);
-		void insertPointLight(PointLight& pl);
 		void insertPatch(Patch& patch);
-		void render(bool isWire, bool isFlat);
-
+		void render();
+		void draw(bool isWire, bool isFlat);
 		void print();
 
 	private:
-		void uniformSubdivide(bool isWire, bool isFlat);
+		void uniformSubdivide();
 		std::pair<ControlPoint*, glm::vec3> interpolateCurve(Curve& c, float u);
 		std::pair<ControlPoint*, glm::vec3> interpolatePatch(Patch& p, float u, float v);
 };
