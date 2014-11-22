@@ -24,19 +24,17 @@
 #include "ControlPoint.h"
 #include "Curve.h"
 #include "Patch.h"
-#include "DirectionalLight.h"
-#include "PointLight.h"
 
 class Scene{
 	int type;
 	float step;
+	bool isAdaptive;
 
 	std::vector<Patch*> patches;
 	std::vector<ControlPoint*> generated_pts;
 	std::vector<glm::vec3> generated_normals;
-
 	public:
-		Scene(int type, float u);
+		Scene(int type, float u, bool adaptive);
 		virtual ~Scene();
 		void insertPatch(Patch& patch);
 		void render();
@@ -45,6 +43,8 @@ class Scene{
 
 	private:
 		void uniformSubdivide();
+		void adaptiveSubdivide();
+		void subdivideTriangle(Patch& patch, ControlPoint& p1, float u1, float v1, ControlPoint& p2, float u2, float v2, ControlPoint& p3, float u3, float v3);
 		std::pair<ControlPoint*, glm::vec3> interpolateCurve(Curve& c, float u);
 		std::pair<ControlPoint*, glm::vec3> interpolatePatch(Patch& p, float u, float v);
 };

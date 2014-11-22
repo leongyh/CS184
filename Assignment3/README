@@ -7,9 +7,8 @@ Unix/Ubuntu 14.01
 
 
 Info/Location: 
-Only I submitted. Class account dir: '/Assignment1/'. All files are zipped 
-into Assignment1.zip due to the nature of the single file submission on gsubmit.
-I had too many library files.
+All files are zipped into Assignment1.zip due to the nature of the 
+single file submission on gsubmit. I had too many library files.
 
 
 Libraries Included: 
@@ -18,45 +17,8 @@ GLUT
 
 
 Instructions: 
-Run make to compile. Run ./as1 <params>
+Run make to compile. Run ./as3 <params>
 
 
 Extra Credit:
 ---------------------
-*Ward Anisotropic
-	The command line options are:	-kw r g b 
-									-kwv x y z
-									-kwc ax ay
-	The r g b values are the reflective coefficients between 0 and 1 inclusive. 
-	x y z is the arbitrary vector used to generate the spread directions. 
-	ax ay are the spread coefficients between (0, 1].
-
-	ex.
-	./as1 -pl 200 200 200 0.2 0.2 0.9 -kd 1 1 1 -ka 0.1 0.1 0 -kw 1.0 0.2 0.4 -kwv 1 0 1 -kwc 0.2 0.4
-
-	NOTE: PLEASE NO ZERO-VECTORS (x y z), OR 0 COEFICIENTS (ax, ay). IT WILL CRASH!!! :(
-
-	Sources used:
-	- http://en.wikipedia.org/wiki/Specular_highlight#Ward_anisotropic_distribution
-	- http://content.gpwiki.org/D3DBook:(Lighting)_Ward
-	- http://www.graphics.cornell.edu/~bjw/wardnotes.pdf
-
-*Multi-Spheres
-	The command line option is: -multi
-
-	Simply add the parameter -multi and it will draw much balls.
-
-	ex.
-	./as1 -pl 200 200 200 0.6 0.6 0.6 -kd 1 1 0 -ka 0.1 0.1 0 -ks 0.8 0.8 0.8 -sp 16 -multi
-
-*Draw Wave
-	The command line option is: -wave
-
-	Simply add the parameter -wave and it will draw a sin * cos wave.
-
-	ex.
-	./as1 -pl 200 200 200 0.6 0.6 0.6 -kd 1 1 0 -ka 0.1 0.1 0 -ks 0.8 0.8 0.8 -sp 16 -wave
-
-	NOTE: I wanted a cloth looking surface but it didn't come out exactly the way I 
-			wanted it to. I have a feeling it might be an issue with the normal
-			calculation of a surface. Or that the surface has no "thickness".

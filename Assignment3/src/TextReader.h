@@ -4,8 +4,6 @@
 #include <glm/glm.hpp>
 
 #include "Scene.h"
-#include "DirectionalLight.h"
-#include "PointLight.h"
 #include "ControlPoint.h"
 #include "Curve.h"
 #include "Patch.h"
