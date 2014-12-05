@@ -1,0 +1,26 @@
+Name: 
+Yew Hung Leong
+
+
+Platform: 
+Unix/Ubuntu 14.01
+
+
+Info/Location: 
+All files are zipped into Assignment3.zip due to the nature of the 
+single file submission on gsubmit. I had too many library files.
+
+Images are in the img/ folder.
+
+
+Libraries Included: 
+GLM
+GLUT
+
+
+Instructions: 
+Run make to compile. Run ./as4 <params>
+
+
+Extra Credit:
+---------------------

@@ -152,9 +152,9 @@ void Scene::draw(bool isWire, bool isFlat){
 				glShadeModel(GL_SMOOTH);
 
 				glLineWidth(1.35f);
-				// glBegin(GL_LINE_LOOP);
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				glBegin(GL_POLYGON);
+				glBegin(GL_LINE_LOOP);
+				// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				// glBegin(GL_POLYGON);
 
 				ControlPoint* p1 = this->generated_pts[i];
 				ControlPoint* p2 = this->generated_pts[i+1];
