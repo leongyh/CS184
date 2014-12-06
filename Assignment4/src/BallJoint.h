@@ -3,7 +3,9 @@
 
 #include <glm/glm.hpp>
 
-class BallJoint{
+#include "Joint.h"
+
+class BallJoint : public Joint{
 	glm::vec3 position;
 	
 	public:

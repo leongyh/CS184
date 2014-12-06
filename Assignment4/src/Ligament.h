@@ -2,14 +2,14 @@
 #define LIGAMENT_H_
 
 #include <glm/glm.hpp>
-#include "BallJoint.h"
+#include "Joint.h"
 
 class Ligament{
-	BallJoint* bj1;
-	BallJoint* bj2;
+	Joint* joint1;
+	Joint* joint2;
 	
 	public:
-		Ligament(BallJoint& j1, BallJoint& j2);
+		Ligament(Joint& j1, Joint& j2);
 		Ligament(const Ligament& obj);
 		virtual ~Ligament();
 

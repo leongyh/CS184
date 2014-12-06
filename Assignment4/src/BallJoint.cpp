@@ -1,8 +1,8 @@
 #include "BallJoint.h"
 #include <cstdio>
 
-BallJoint::BallJoint(float x, float y, float z){
-	this->position = glm::vec3(x, y, z);
+BallJoint::BallJoint(float x, float y, float z) : Joint(float x, float y, float z){
+
 }
 
 BallJoint::BallJoint(const BallJoint& obj){
