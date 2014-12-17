@@ -2,17 +2,19 @@
 #define IK_SOLVER_H_
 
 #include <glm/glm.hpp>
+#include <Eigen/Dense>
+
+#include <iostream>
+
+#include "Arm.h"
 
 class IKSolver{
-	glm:: position;
-	
+
 	public:
-		IKSolver(float x, float y, float z);
-		IKSolver(const IKSolver& obj);
+		IKSolver();
 		virtual ~IKSolver(); 
 		
-		
-		void print();
+		glm::vec3 solve(Arm& arm);
 };
 
 #endif

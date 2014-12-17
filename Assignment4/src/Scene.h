@@ -3,9 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <vector>
-#include <map>
 #include <string>
-#include <utility>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -21,11 +19,15 @@
 #include <GL/glu.h>
 #endif
 
-#include "ControlPoint.h"
-#include "Curve.h"
-#include "Patch.h"
+#include "Joint.h"
+#include "Arm.h"
+#include "IKSolver.h"
 
 class Scene{
+	Arm* arm;
+	IKSolver* solver;
+	float step;
+
 	public:
 		Scene();
 		virtual ~Scene();

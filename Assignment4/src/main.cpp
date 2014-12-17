@@ -25,7 +25,6 @@
 
 #include <glm/glm.hpp>
 
-#include "TextReader.h"
 #include "Scene.h"
 
 #define PI 3.14159265  // Should be used from mathlib
@@ -103,17 +102,12 @@ void renderScene(void) {
   
   glLoadIdentity();
 
-  gluLookAt(0.0f, -9.0f, 0.0f,
+  gluLookAt(0.0f, -12.0f, 0.0f,
       0.0, 0.0f, 0.0f,
       0.0f, 0.0f, 1.0f);
-
-  glScalef(scale, scale, scale);
-  glTranslatef(tx, 0.0f, tz);
-  glRotatef(angle_z, 0.0f, 0.0f, 1.0f);
-  glRotatef(angle_x, 1.0f, 0.0f, 0.0f);
   
-  scene->draw(WIREFRAME, FLATSHADING);
-
+  scene->draw();
+  
   glutSwapBuffers();
   glFlush();
 }
@@ -151,73 +145,6 @@ void keyPress(unsigned char key, int x, int y){
     case ' ':
       exit(0);   //quit on space
       break;
-    case 'w':
-      WIREFRAME = WIREFRAME ^ true;
-      printf("%x\n", WIREFRAME);
-      break;
-    case 's':
-      if(WIREFRAME){
-        WIREFRAME = WIREFRAME ^ true;
-      } else{
-        FLATSHADING = FLATSHADING ^ true;
-      }
-      break;
-    case '+':
-      scale += 0.01f;
-      break;
-    case '=':
-      scale += 0.01f;
-      break;
-    case '-':
-      if(scale > 0.3f){
-        scale -= 0.01f;
-      }
-      break;
-    case '_':
-      if(scale > 0.3f){
-        scale -= 0.01f;
-      }
-      break;
-    default:
-      break;
-  }
-}
-
-void specialKeyPress(int key, int xx, int yy) {
-  const float rot_sen = 1.0f;
-  const float trans_sen = 0.1f;
-
-  int mod = glutGetModifiers();
-
-  switch(key){
-    case GLUT_KEY_LEFT:
-      if(mod == GLUT_ACTIVE_SHIFT){
-        tx -= trans_sen;
-      } else{
-        angle_z -= rot_sen;
-      }
-      break;
-    case GLUT_KEY_RIGHT:
-      if(mod == GLUT_ACTIVE_SHIFT){
-        tx += trans_sen;
-      } else{
-        angle_z += rot_sen;
-      }
-      break;
-    case GLUT_KEY_UP:
-      if(mod == GLUT_ACTIVE_SHIFT){
-        tz += trans_sen;
-      } else{
-        angle_x -= rot_sen;
-      }
-      break;
-    case GLUT_KEY_DOWN:
-      if(mod == GLUT_ACTIVE_SHIFT){
-        tz -= trans_sen;
-      } else{
-        angle_x += rot_sen;
-      }
-      break;
     default:
       break;
   }
@@ -232,15 +159,8 @@ int main(int argc, char *argv[]) {
   viewport.h = 750;
 
   // printf("%s\n", argv[3]);
-  if(argc < 4){
-    scene = new Scene(0, atof(argv[2]), false);  
-  } else{
-    scene = new Scene(0, atof(argv[2]), true);
-  }
+  scene = new Scene();
   
-  TextReader* reader = new TextReader();
-
-  reader->parse(*scene, argv[1]);
   scene->render();
   // scene->print();
 
@@ -257,7 +177,6 @@ int main(int argc, char *argv[]) {
   glutIdleFunc(renderScene);
   
   glutKeyboardFunc(keyPress);
-  glutSpecialFunc(specialKeyPress);
 
   glEnable(GL_DEPTH_TEST);
   
