@@ -19,7 +19,9 @@ class Joint{
 
 		void updateAngles(float x, float y, float z);
 		// void rotateQuarternion(float x, float y, float z);
+		float getAngle();
 		glm::vec3 getAngles();
+		glm::vec3 getAxis();
 		float getLength();
 		
 		void print();

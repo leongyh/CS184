@@ -50,16 +50,8 @@ class Viewport {
 Viewport	viewport;
 Scene* scene;
 
-bool WIREFRAME = true;
-bool FLATSHADING = true;
-
-float phi = 90.0f, theta = 0.0f;
-float eyeX = 0.0f, eyeY = -5.0f, eyeZ = 0.0f;
-float transX = 0.0f, transY = 0.0f, transZ = 0.0f;
-
-float angle_z = 0.0f, angle_x = 0.0f;
-float tx = 0.0f, tz = 0.0f;
-float scale = 1.0f;
+float sens = 0.01f;
+float x_t, y_t, z_t = 0.0f;
 
 GLfloat light_position0[] = { 0.0, 1.0, -0.5, 0.0 };
 GLfloat light_position1[] = { 20.0, -20.0, 0.0, 1.0 };
@@ -102,11 +94,14 @@ void renderScene(void) {
   
   glLoadIdentity();
 
-  gluLookAt(0.0f, -12.0f, 0.0f,
+  gluLookAt(0.0f, -14.0f, 0.0f,
       0.0, 0.0f, 0.0f,
       0.0f, 0.0f, 1.0f);
   
+  scene->render(x_t, y_t, z_t);
   scene->draw();
+
+  // printf("x: %f, y: %f, z: %f\n", x_t, y_t, z_t);
   
   glutSwapBuffers();
   glFlush();
@@ -145,6 +140,24 @@ void keyPress(unsigned char key, int x, int y){
     case ' ':
       exit(0);   //quit on space
       break;
+    case 'd':
+      x_t += sens;
+      break;
+    case 'a':
+      x_t -= sens;
+      break;
+    case 'c':
+      y_t += sens;
+      break;
+    case 'x':
+      y_t -= sens;
+      break;
+    case 'w':
+      z_t += sens;
+      break;
+    case 's':
+      z_t -= sens;
+      break;
     default:
       break;
   }
@@ -155,13 +168,13 @@ void keyPress(unsigned char key, int x, int y){
 //****************************************************
 int main(int argc, char *argv[]) {
   // Initalize theviewport size
-  viewport.w = 750;
-  viewport.h = 750;
+  viewport.w = 700;
+  viewport.h = 700;
 
   // printf("%s\n", argv[3]);
   scene = new Scene();
   
-  scene->render();
+  // scene->render();
   // scene->print();
 
   glutInit(&argc, argv);

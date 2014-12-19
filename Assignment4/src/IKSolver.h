@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "Arm.h"
+#include "Goal.h"
 
 class IKSolver{
 
@@ -14,7 +15,7 @@ class IKSolver{
 		IKSolver();
 		virtual ~IKSolver(); 
 		
-		glm::vec3 solve(Arm& arm);
+		void solve(Arm& arm, Goal& goal);
 };
 
 #endif

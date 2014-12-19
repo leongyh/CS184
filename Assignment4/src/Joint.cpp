@@ -45,8 +45,16 @@ void Joint::updateAngles(float x, float y, float z){
 // 	this->angles = glm::vec3((float)calc.x, (float)calc.y, (float)calc.z);
 // }
 
+float Joint::getAngle(){
+	return glm::length(this->angles);
+}
+
 glm::vec3 Joint::getAngles(){
-	return this->angles;
+	this->angles;
+}
+
+glm::vec3 Joint::getAxis(){
+	return glm::normalize(this->angles);
 }
 
 float Joint::getLength(){

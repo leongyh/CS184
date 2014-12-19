@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
+#include <Eigen/Dense>
 #include <vector>
 
 #ifdef _WIN32
@@ -20,9 +21,11 @@
 #endif
 
 #include "Joint.h"
+#include "Goal.h"
 
 class Arm{
 	std::vector<Joint*> joints;
+	float length;
 	// Joint* base;
 	Joint* end;
 	
@@ -31,10 +34,12 @@ class Arm{
 		Arm(const Arm& obj);
 		virtual ~Arm();
 
-		void applyDeltaAngle(std::vector<float>& dA);
+		void applyDeltaAngle(Eigen::VectorXf dA);
 		glm::vec3 getEndPoint();
 		glm::vec3 getJointPos(int i);
 		std::vector<Joint*> getJoints();
+		float getMaxLength();
+		Goal* generateGoal();
 		void draw();
 		
 		void print();

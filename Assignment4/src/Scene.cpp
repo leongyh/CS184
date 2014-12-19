@@ -5,6 +5,7 @@
 
 Scene::Scene(){
 	this->arm = new Arm();
+	this->goal = arm->generateGoal();
 	this->step = 0.0;
 	this->solver = new IKSolver();
 }
@@ -14,16 +15,18 @@ Scene::~Scene(){
 }
 
 
-void Scene::render(){
+void Scene::render(float x, float y, float z){
 	// printf("Rendering start...\n");
-	// std::vector<float> vec;
-	// vec.push_back()
-	// this->arm->applyDeltaAngle
+	goal->move(x, y, z);
+	solver->solve(*arm, *goal);
 }
 
 void Scene::draw(){
 	this->arm->draw();
-	solver->solve(*arm);
+	this->goal->draw();
+	// goal->print();
+
+	// glm::vec3 p = this->arm->getEndPoint();
 	// glm::vec3 p = this->arm->getJointPos(3);
 
 	// glPushMatrix();

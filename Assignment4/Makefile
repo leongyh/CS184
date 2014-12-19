@@ -28,4 +28,4 @@ $(BINDIR)/%.o: $(SRCDIR)/%.cpp
 
 clean:
 	rm -f $(BINDIR)/*
-	rm -f as3
+	rm -f as4

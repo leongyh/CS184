@@ -2,6 +2,7 @@
 #define SCENE_H_
 
 #include <glm/glm.hpp>
+#include <Eigen/Dense>
 #include <vector>
 #include <string>
 
@@ -21,17 +22,19 @@
 
 #include "Joint.h"
 #include "Arm.h"
+#include "Goal.h"
 #include "IKSolver.h"
 
 class Scene{
 	Arm* arm;
+	Goal* goal;
 	IKSolver* solver;
 	float step;
 
 	public:
 		Scene();
 		virtual ~Scene();
-		void render();
+		void render(float x, float y, float z);
 		void draw();
 		void print();
 };
