@@ -27,7 +27,8 @@ Parameters
 
 Path Mode
 -----------------------
-Press b to begin and pause at any time
+Press b to begin and pause at any time.
+
 1 		Elliptical path that goes within and out of range of the system.
 2		Elliptical spiral path that goes within and out of range of the system. Stops at the end.
 3		Eight that passes through the base. 
