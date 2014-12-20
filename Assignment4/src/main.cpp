@@ -26,6 +26,7 @@
 #include <glm/glm.hpp>
 
 #include "Scene.h"
+#include "Path.h"
 
 #define PI 3.14159265  // Should be used from mathlib
 inline float sqr(float x) { return x*x; }
@@ -49,9 +50,12 @@ class Viewport {
 //****************************************************
 Viewport	viewport;
 Scene* scene;
+Path* path;
 
-float sens = 0.01f;
+float sens = 0.05f;
 float x_t, y_t, z_t = 0.0f;
+bool freeMode = false;
+bool begin = false;
 
 GLfloat light_position0[] = { 0.0, 1.0, -0.5, 0.0 };
 GLfloat light_position1[] = { 20.0, -20.0, 0.0, 1.0 };
@@ -63,6 +67,11 @@ GLfloat mat_ambient[] = { 0.3, 0.0, 0.1, 1.0 };
 GLfloat mat_diffuse[] = { 0.85, 0.0, 0.1, 1.0 };
 GLfloat mat_specular[] = { 0.8, 0.8, 0.8, 1.0 };
 GLfloat shininess[] = { 16.0 };
+
+GLfloat mat_ambient2[] = { 0.1, 0.0, 0.3, 1.0 };
+GLfloat mat_diffuse2[] = { 0.1, 0.0, 0.85, 1.0 };
+GLfloat mat_specular2[] = { 0.8, 0.8, 0.8, 1.0 };
+GLfloat shininess2[] = { 16.0 };
 
 void initLights(){
   glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -79,11 +88,6 @@ void initLights(){
   glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
   glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
 
-  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
-  glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
-  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-  glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
-
   glEnable(GL_LIGHTING);
   glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
@@ -94,14 +98,31 @@ void renderScene(void) {
   
   glLoadIdentity();
 
-  gluLookAt(0.0f, -14.0f, 0.0f,
+  gluLookAt(0.0f, -16.0f, 0.0f,
       0.0, 0.0f, 0.0f,
       0.0f, 0.0f, 1.0f);
   
-  scene->render(x_t, y_t, z_t);
-  scene->draw();
+  if(freeMode){
+    scene->render(x_t, y_t, z_t);
+  } else{
+    if(begin){
+      scene->renderPath();
+    }
+  }
 
-  // printf("x: %f, y: %f, z: %f\n", x_t, y_t, z_t);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+  scene->drawArm();
+
+  glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_ambient2);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat_diffuse2);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular2);
+  glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess2);
+  scene->drawGoal();
+
+  if(!freeMode)  scene->drawPath();
   
   glutSwapBuffers();
   glFlush();
@@ -158,6 +179,8 @@ void keyPress(unsigned char key, int x, int y){
     case 's':
       z_t -= sens;
       break;
+    case 'b':
+      begin ^= true;
     default:
       break;
   }
@@ -171,8 +194,25 @@ int main(int argc, char *argv[]) {
   viewport.w = 700;
   viewport.h = 700;
 
-  // printf("%s\n", argv[3]);
-  scene = new Scene();
+  std::string arg(argv[1]);
+  int pathType = 1;
+
+  if(arg == "-free"){
+    printf("%s\n", argv[1]);
+    freeMode = true;  
+  } else if(arg == "-path"){
+    pathType = atoi(argv[2]);
+  }
+  
+
+  if(freeMode){
+    scene = new Scene();
+  } else{
+    path = new Path(pathType);
+    scene = new Scene(path);
+    // scene->initializePath();
+  }
+  
   
   // scene->render();
   // scene->print();

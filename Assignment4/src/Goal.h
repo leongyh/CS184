@@ -27,6 +27,8 @@ class Goal{
 		Goal(glm::vec3 pos);
 		virtual ~Goal(); 
 
+		void setPosition(float x, float y, float z);
+		void setPosition(glm::vec3 p);
 		void move(float x, float y, float z);
 		glm::vec3 getPosition();
 		void draw();

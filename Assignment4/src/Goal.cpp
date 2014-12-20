@@ -20,6 +20,10 @@ void Goal::setPosition(float x, float y, float z){
 	position = glm::vec3(x, y, z);
 }
 
+void Goal::setPosition(glm::vec3 p){
+	position = p;
+}
+
 void Goal::move(float x, float y, float z){
 	this->displacement = glm::vec3(x, y, z);
 }

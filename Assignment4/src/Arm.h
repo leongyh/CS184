@@ -26,6 +26,7 @@
 class Arm{
 	std::vector<Joint*> joints;
 	float length;
+	float simdA;
 	// Joint* base;
 	Joint* end;
 	
@@ -40,6 +41,9 @@ class Arm{
 		std::vector<Joint*> getJoints();
 		float getMaxLength();
 		Goal* generateGoal();
+		glm::vec3 simX(int i);
+		glm::vec3 simY(int i);
+		glm::vec3 simZ(int i);
 		void draw();
 		
 		void print();

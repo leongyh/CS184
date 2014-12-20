@@ -22,6 +22,8 @@ Arm::Arm(){
 	}
 
 	length = len;
+
+	simdA = 0.1;
 }
 
 Arm::~Arm(){
@@ -181,6 +183,189 @@ Goal* Arm::generateGoal(){
 	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j4->getLength()));
 
 	return new Goal(glm::vec3(transform * p));
+}
+
+glm::vec3 Arm::simX(int i){
+	glm::vec3 current_pos = this->getEndPoint();
+	glm::vec4 p = glm::vec4(0.0, 0.0, 0.0, 1.0);
+	glm::mat4 transform = glm::mat4(1.0f);
+
+	Joint* j1 = joints[0];
+	Joint* j2 = joints[1];
+	Joint* j3 = joints[2];
+	Joint* j4 = joints[3];
+
+	if(i == 0){
+		glm::vec3 axis = j1->getAngles();
+		axis = axis + glm::vec3(simdA, 0.0f, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j1->getAngle(), j1->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j1->getLength()));
+
+	if(i == 1){
+		glm::vec3 axis = j2->getAngles();
+		axis = axis + glm::vec3(simdA, 0.0f, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j2->getAngle(), j2->getAxis());	
+	}
+
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j2->getLength()));
+
+	if(i == 2){
+		glm::vec3 axis = j3->getAngles();
+		axis = axis + glm::vec3(simdA, 0.0f, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j3->getAngle(), j3->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j3->getLength()));
+
+	if(i == 3){
+		glm::vec3 axis = j4->getAngles();
+		axis = axis + glm::vec3(simdA, 0.0f, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j4->getAngle(), j4->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j4->getLength()));
+
+	return glm::vec3(transform * p) - current_pos;
+}
+
+glm::vec3 Arm::simY(int i){
+	glm::vec3 current_pos = this->getEndPoint();
+	glm::vec4 p = glm::vec4(0.0, 0.0, 0.0, 1.0);
+	glm::mat4 transform = glm::mat4(1.0f);
+
+	Joint* j1 = joints[0];
+	Joint* j2 = joints[1];
+	Joint* j3 = joints[2];
+	Joint* j4 = joints[3];
+
+	if(i == 0){
+		glm::vec3 axis = j1->getAngles();
+		axis = axis + glm::vec3(0.0f, simdA, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j1->getAngle(), j1->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j1->getLength()));
+
+	if(i == 1){
+		glm::vec3 axis = j2->getAngles();
+		axis = axis + glm::vec3(0.0f, simdA, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j2->getAngle(), j2->getAxis());	
+	}
+
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j2->getLength()));
+
+	if(i == 2){
+		glm::vec3 axis = j3->getAngles();
+		axis = axis + glm::vec3(0.0f, simdA, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j3->getAngle(), j3->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j3->getLength()));
+
+	if(i == 3){
+		glm::vec3 axis = j4->getAngles();
+		axis = axis + glm::vec3(0.0f, simdA, 0.0f);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j4->getAngle(), j4->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j4->getLength()));
+
+	return glm::vec3(transform * p) - current_pos;
+}
+
+glm::vec3 Arm::simZ(int i){
+	glm::vec3 current_pos = this->getEndPoint();
+	glm::vec4 p = glm::vec4(0.0, 0.0, 0.0, 1.0);
+	glm::mat4 transform = glm::mat4(1.0f);
+
+	Joint* j1 = joints[0];
+	Joint* j2 = joints[1];
+	Joint* j3 = joints[2];
+	Joint* j4 = joints[3];
+
+	if(i == 0){
+		glm::vec3 axis = j1->getAngles();
+		axis = axis + glm::vec3(0.0f, 0.0f, simdA);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j1->getAngle(), j1->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j1->getLength()));
+
+	if(i == 1){
+		glm::vec3 axis = j2->getAngles();
+		axis = axis + glm::vec3(0.0f, 0.0f, simdA);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j2->getAngle(), j2->getAxis());	
+	}
+
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j2->getLength()));
+
+	if(i == 2){
+		glm::vec3 axis = j3->getAngles();
+		axis = axis + glm::vec3(0.0f, 0.0f, simdA);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j3->getAngle(), j3->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j3->getLength()));
+
+	if(i == 3){
+		glm::vec3 axis = j4->getAngles();
+		axis = axis + glm::vec3(0.0f, 0.0f, simdA);
+		float angle = glm::length(axis);
+
+		transform = transform * glm::rotate(angle, glm::normalize(axis));	
+	} else{
+		transform = transform * glm::rotate(j4->getAngle(), j4->getAxis());	
+	}
+	
+	transform = transform * glm::translate(glm::vec3(0.0f, 0.0f, j4->getLength()));
+
+	return glm::vec3(transform * p) - current_pos;
 }
 
 void Arm::print(){

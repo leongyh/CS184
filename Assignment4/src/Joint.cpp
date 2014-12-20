@@ -50,7 +50,7 @@ float Joint::getAngle(){
 }
 
 glm::vec3 Joint::getAngles(){
-	this->angles;
+	return this->angles;
 }
 
 glm::vec3 Joint::getAxis(){

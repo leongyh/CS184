@@ -24,8 +24,10 @@
 #include "Arm.h"
 #include "Goal.h"
 #include "IKSolver.h"
+#include "Path.h"
 
 class Scene{
+	Path* path;
 	Arm* arm;
 	Goal* goal;
 	IKSolver* solver;
@@ -33,9 +35,13 @@ class Scene{
 
 	public:
 		Scene();
+		Scene(Path* path);
 		virtual ~Scene();
 		void render(float x, float y, float z);
-		void draw();
+		void renderPath();
+		void drawArm();
+		void drawGoal();
+		void drawPath();
 		void print();
 };
 
