@@ -196,7 +196,6 @@ int main(int argc, char *argv[]) {
   int pathType = 1;
 
   if(arg == "-free"){
-    printf("%s\n", argv[1]);
     freeMode = true;  
   } else if(arg == "-path"){
     pathType = atoi(argv[2]);
