@@ -27,8 +27,6 @@ class Arm{
 	std::vector<Joint*> joints;
 	float length;
 	float simdA;
-	// Joint* base;
-	Joint* end;
 	
 	public:
 		Arm();

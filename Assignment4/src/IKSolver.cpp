@@ -94,13 +94,13 @@ void IKSolver::solve(Arm& arm, Goal& goal){
 			g = max_length * glm::normalize(g);
 		}
 
-		if(glm::length(g-e) <= 0.015) done = true;
+		if(glm::length(g-e) <= 0.075) done = true;
 
 		if(!done){
 			Eigen::MatrixXf jacobian(3, 12);
 		
 			Eigen::Vector3f dP(g.x - e.x, g.y - e.y, g.z - e.z);
-			dP = 0.1 * dP;
+			dP = 0.05 * dP;
 			std::vector<Joint*> joints = arm.getJoints();
 
 			//analytical method

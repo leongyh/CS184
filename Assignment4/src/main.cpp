@@ -78,12 +78,10 @@ void initLights(){
 
   glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
-  // glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
   glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
   glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
   glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
 
-  // glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
   glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
   glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
   glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
@@ -98,7 +96,7 @@ void renderScene(void) {
   
   glLoadIdentity();
 
-  gluLookAt(0.0f, -16.0f, 0.0f,
+  gluLookAt(0.0f, -18.0f, 0.0f,
       0.0, 0.0f, 0.0f,
       0.0f, 0.0f, 1.0f);
   
@@ -210,12 +208,7 @@ int main(int argc, char *argv[]) {
   } else{
     path = new Path(pathType);
     scene = new Scene(path);
-    // scene->initializePath();
   }
-  
-  
-  // scene->render();
-  // scene->print();
 
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);

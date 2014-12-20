@@ -35,10 +35,6 @@ void Scene::render(float x, float y, float z){
 	solver->solve(*arm, *goal);
 }
 
-// Scene::initializePath(){
-	
-// }
-
 void Scene::renderPath(){
 	glm::vec3 p = path->getPosition(step);
 	goal->setPosition(p);
@@ -49,17 +45,6 @@ void Scene::renderPath(){
 
 void Scene::drawArm(){
 	this->arm->draw();
-	// goal->print();
-
-	// glm::vec3 p = this->arm->getEndPoint();
-	// glm::vec3 p = this->arm->getJointPos(3);
-
-	// glPushMatrix();
-	// 	glTranslatef(p.x, p.y, p.z);
-	// 	glutSolidSphere(0.5f, 20, 20);
-	// glPopMatrix();
-
-	// printf("%f %f %f\n", p.x,p.y,p.z);
 }
 
 void Scene::drawGoal(){

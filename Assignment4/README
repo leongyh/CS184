@@ -7,20 +7,39 @@ Unix/Ubuntu 14.01
 
 
 Info/Location: 
-All files are zipped into Assignment3.zip due to the nature of the 
+All files are zipped into Assignment4.zip due to the nature of the 
 single file submission on gsubmit. I had too many library files.
-
-Images are in the img/ folder.
 
 
 Libraries Included: 
 GLM
 GLUT
+Eigen
 
 
 Instructions: 
 Run make to compile. Run ./as4 <params>
 
+Parameters
+----------------------
+-free			This is free mode where you can control the goal manually via w,a,s,d,c,x. See below.
+-path <int>		This is path mode that the system moves along some hardcoded paths. Define an int between 1 to x. See below.
+
+Path Mode
+-----------------------
+Press b to begin and pause at any time
+1 		Elliptical path that goes within and out of range of the system.
+2		Elliptical spiral path that goes within and out of range of the system. Stops at the end.
+3		Eight that passes through the base. 
+
+
+Free Mode
+-----------------------
+w/s:	up/down
+a/d:	left/right
+x/c:	in/out
+
 
 Extra Credit:
 ---------------------
+-Free mode

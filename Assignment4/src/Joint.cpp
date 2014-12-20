@@ -19,32 +19,6 @@ void Joint::updateAngles(float x, float y, float z){
 	this->angles = this->angles + glm::vec3(x, y, z);
 }
 
-// void Joint::rotateQuarternion(float x, float y, float z){
-// 	Quaternion q, work, qp(*this);
-// 	work.LoadIdentity();
-
-// 	if(x){
-// 		q.SetRotation(x, 0, 0);
-// 		work *= q;
-// 	}
-
-// 	if(y){
-// 		q.SetRotation(0, y, 0);
-// 		work *= q;
-// 	}
-
-// 	if(z){
-// 		q.SetRotation(0, 0, z);
-// 		work *= q;
-// 	}
-
-// 	Quaternion calc;
-// 	calc = (work*qp);
-// 	calc *= work.Conjugate();
-
-// 	this->angles = glm::vec3((float)calc.x, (float)calc.y, (float)calc.z);
-// }
-
 float Joint::getAngle(){
 	return glm::length(this->angles);
 }
